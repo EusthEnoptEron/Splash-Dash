@@ -141,10 +141,18 @@ public class SpurtEmitter : MonoBehaviour
         }
     }
 
+    public Vector3 Inertia
+    {
+        get
+        {
+            //return Vector3.Dot(rigidbody ? rigidbody.velocity : Vector3.zero, transform.forward) * transform.forward;
+            return rigidbody ? rigidbody.velocity * 1.3f : Vector3.zero;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        var inertia = rigidbody ? rigidbody.velocity : Vector3.zero;
    
         prevRadius = Mathf.Clamp(prevRadius * Random.Range(0.9f, 1.2f), radius / 4 * 3, radius / 4 * 5);
         prevRadius = radius;
@@ -160,14 +168,14 @@ public class SpurtEmitter : MonoBehaviour
             int tankCount = validTanks.Count();
             var color = validTanks.Select(t => t.color).Aggregate((c1, c2) =>
             {
-                c1.r += c2.r / tankCount;
-                c1.g += c2.g / tankCount;
-                c1.b += c2.b / tankCount;
+                c1.r += c2.r;
+                c1.g += c2.g;
+                c1.b += c2.b;
                 return c1;
             });
             color.a = 1;
 
-            positions.AddFirst(new SpurtPosition(transform.position, inertia + transform.forward * startVelocity, prevRadius, color/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
+            positions.AddFirst(new SpurtPosition(transform.position, Inertia + transform.forward * startVelocity, prevRadius, color/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
             {
                 V = (uvCounter++ % count-1f) / count
             });

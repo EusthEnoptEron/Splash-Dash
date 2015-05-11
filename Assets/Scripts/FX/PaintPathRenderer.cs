@@ -25,7 +25,7 @@ public class PaintPathRenderer : MonoBehaviour {
         for (int i = 0; i < vertexCount; i++)
         {
             float t = i * 0.1f;
-            renderer.SetPosition(i, emitter.transform.position + direction * velocity * t + 0.5f * Physics.gravity * t * t);
+            renderer.SetPosition(i, emitter.transform.position + (direction * velocity + emitter.Inertia) * t + 0.5f * Physics.gravity * t * t);
         }
 
         renderer.material.mainTextureOffset += new Vector2(-10 * Time.deltaTime, 0);
