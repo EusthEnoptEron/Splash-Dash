@@ -18,10 +18,20 @@ public class EffectController : MonoBehaviour {
 	void Update () {
         var currentColor = paintBrush.GetColor(transform.position);
 
+        Effect activeEffect = null;
+
+        // First, disable all effects that are inactive
         foreach (var effect in _effects)
         {
-            effect.enabled = CompareColor(currentColor, effect.color);
+            if (!CompareColor(currentColor, effect.color))
+                effect.enabled = false;
+            else
+                activeEffect = effect;
         }
+        
+        // Now, enable active effect
+        if (activeEffect != null)
+            activeEffect.enabled = true;
 	}
 
     bool CompareColor(Color c1, Color c2)
