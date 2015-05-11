@@ -1,0 +1,20 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Paint
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> Result;
+
+float4 Color;
+float4 Offset;
+float Radius;
+
+[numthreads(5,5,1)]
+void Paint (uint3 id : SV_DispatchThreadID)
+{
+    // TODO: insert actual code here!
+	if(length(id.xy - float2(Radius, Radius) ) <= Radius) {
+		Result[Offset.xy + id.xy] = Color;
+	}
+    // Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
+} 

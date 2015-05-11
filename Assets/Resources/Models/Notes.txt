@@ -1,0 +1,2 @@
+- Auto hat falsche Grösse
+- Kanonen-Submesh sollte so abgespaltet sein, dass man sie rauf- und runterrotieren kann.
