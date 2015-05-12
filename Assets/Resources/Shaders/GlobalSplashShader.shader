@@ -106,7 +106,7 @@
 			if(c.a < 0.4)
 				o.Alpha = 0;
 			else
-				o.Alpha = c.a * 3;
+				o.Alpha = clamp(c.a * 3, 0, 0.9);
 			
 			if(color.r == 1 && color.g == 1 && color.b == 1) {
 				o.Alpha = 0;
