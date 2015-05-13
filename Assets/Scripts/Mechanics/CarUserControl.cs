@@ -19,7 +19,7 @@ public class CarUserControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!networkView || networkView.isMine)
+        if (!networkView || !networkView.enabled || networkView.isMine)
         {
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
