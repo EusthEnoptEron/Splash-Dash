@@ -8,6 +8,7 @@ public class NetworkController : MonoBehaviour {
 
 
     public GameObject carPrefab;
+    public GameObject paintbrushPrefab;
 
 	// Use this for initialization
     private void Start()
@@ -51,6 +52,9 @@ public class NetworkController : MonoBehaviour {
 
     void OnServerInitialized()
     {
+        var paintbrush = Network.Instantiate(paintbrushPrefab, Vector3.zero, Quaternion.identity, 0) as GameObject;
+        paintbrush.transform.SetParent(transform, false);
+
         SpawnPlayer();
     }
 

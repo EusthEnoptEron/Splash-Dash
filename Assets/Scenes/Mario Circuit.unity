@@ -662,12 +662,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 480183975}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 619d9e5dea0a9464abda12f6d35521af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 132014, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
+  paintbrushPrefab: {fileID: 140618, guid: cc9f0f3ca0082c64bac008d333ef49ab, type: 2}
 --- !u!1 &507677976
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,20 +929,24 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 14867484, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
+    - target: {fileID: 14841306, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
       propertyPath: m_ViewID.m_ID
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 14867484, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
+    - target: {fileID: 14841306, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14824198, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 14824198, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 132014, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 14867484, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

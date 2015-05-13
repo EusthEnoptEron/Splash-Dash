@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PaintBrush : MonoBehaviour {
+public class PaintBrush : NetworkBehaviour {
     struct Point
     {
         public int x; public int y;
@@ -20,8 +20,13 @@ public class PaintBrush : MonoBehaviour {
     public const float SCALE_FACTOR = 1;
 
 
+    public static PaintBrush Locate()
+    {
+        return GameObject.FindGameObjectWithTag("Paintbrush").GetComponent<PaintBrush>();
+    }
 	// Use this for initialization
-	void Start () {
+    void Start () {
+       
         rPaintTexture = new RenderTexture(4096, 4096, 8);
         rPaintTexture.enableRandomWrite = true;
         rPaintTexture.Create();
@@ -36,7 +41,7 @@ public class PaintBrush : MonoBehaviour {
         Shader.SetGlobalFloat("_PaintScale", 0);
     }
 
-    public void Paint(Vector3 worldPos, Color color, int width = 20)
+    public void Paint(Vector3 worldPos, Color color, int width = 20, bool forward = true)
     {
         width = Mathf.Max(5, width);
 
@@ -69,8 +74,14 @@ public class PaintBrush : MonoBehaviour {
             }
         }
 
+        if(forward)
+            networkView.RPC("PaintRPC", RPCMode.OthersBuffered, worldPos, color.r, color.g, color.b, color.a, width);
+    }
 
-        counter++;
+    [RPC]
+    private void PaintRPC(Vector3 worldPos, float r, float g, float b, float a, int width)
+    {
+        Paint(worldPos, new Color(r, g, b, a), width, false);
     }
 
     public Color GetColor(Vector3 worldPos)
@@ -92,4 +103,8 @@ public class PaintBrush : MonoBehaviour {
         //Debug.Log(counter);
         counter = 0;
 	}
+
+    protected override void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+    }
 }

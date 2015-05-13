@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 [RequireComponent(typeof(MeshRenderer), typeof(MeshFilter))]
-public class SpurtEmitter : MonoBehaviour
+public class SpurtEmitter : NetworkBehaviour
 {
     class SpurtPosition
     {
@@ -25,6 +25,7 @@ public class SpurtEmitter : MonoBehaviour
             Velocity = velocity;
             Radius = radius;
             Color = color;
+            
         }
 
 
@@ -61,15 +62,17 @@ public class SpurtEmitter : MonoBehaviour
     public int count = 100;
     public float startVelocity = 10;
     public int sides = 8;
-    public bool shooting = false;
     public float radius = 0.1f;
     private float prevRadius = 0.1f;
     public float radiusGrowthSpeed = 1;
 
+    private Color shootingColor = Color.clear;
+    
     private MeshRenderer renderer;
     private MeshFilter meshFilter;
     private new Rigidbody rigidbody;
-    private static PaintBrush paintBrush;
+    private PaintBrush paintBrush;
+
 
     //private Mesh mesh;
     private LinkedList<SpurtPosition> positions = new LinkedList<SpurtPosition>();
@@ -82,6 +85,7 @@ public class SpurtEmitter : MonoBehaviour
         renderer = GetComponent<MeshRenderer>();
         meshFilter = GetComponent<MeshFilter>();
         rigidbody = GetComponentInParent<Rigidbody>();
+
         //mesh = meshFilter.mesh;
         
         for (int i = 0; i < count; i++)
@@ -89,7 +93,7 @@ public class SpurtEmitter : MonoBehaviour
             positions.AddFirst((SpurtPosition)null);
         }
 
-        paintBrush = GetComponent<PaintBrush>();
+        paintBrush = GameObject.FindGameObjectWithTag("Paintbrush").GetComponent<PaintBrush>();
         tanks = GetComponentsInChildren<PaintTank>();
     }
 
@@ -103,7 +107,7 @@ public class SpurtEmitter : MonoBehaviour
             {
                 if (position.Value.IsDead)
                 {
-                    if (!position.Value.IsPainted)
+                    if (!position.Value.IsPainted && !IsRemoteControlled)
                     {
                         paintBrush.Paint(position.Value.Position, position.Value.Color, (int)(position.Value.Radius * 2 * PaintBrush.SCALE_FACTOR ));
 
@@ -151,7 +155,7 @@ public class SpurtEmitter : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
    
         prevRadius = Mathf.Clamp(prevRadius * Random.Range(0.9f, 1.2f), radius / 4 * 3, radius / 4 * 5);
@@ -163,25 +167,31 @@ public class SpurtEmitter : MonoBehaviour
         var validTanks = tanks.Where(tank => !tank.IsEmpty && tank.Shooting);
 
 
-        if (validTanks.Count() > 0)
+        if ((!IsRemoteControlled && validTanks.Count() > 0) || (IsRemoteControlled && shootingColor != Color.clear))
         {
-            int tankCount = validTanks.Count();
-            var color = validTanks.Select(t => t.color).Aggregate((c1, c2) =>
+            if (!IsRemoteControlled)
             {
-                c1.r += c2.r;
-                c1.g += c2.g;
-                c1.b += c2.b;
-                return c1;
-            });
-            color.a = 1;
+                int tankCount = validTanks.Count();
+                shootingColor = validTanks.Select(t => t.color).Aggregate((c1, c2) =>
+                {
+                    c1.r += c2.r;
+                    c1.g += c2.g;
+                    c1.b += c2.b;
+                    return c1;
+                });
+            }
+            shootingColor.a = 1;
 
-            positions.AddFirst(new SpurtPosition(transform.position, Inertia + transform.forward * startVelocity, prevRadius, color/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
+            positions.AddFirst(new SpurtPosition(transform.position, Inertia + transform.forward * startVelocity, prevRadius, shootingColor/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
             {
-                V = (uvCounter++ % count-1f) / count
+                V = (uvCounter++ % count - 1f) / count
             });
-        } 
+        }
         else
+        {
             positions.AddFirst((SpurtPosition)null);
+            shootingColor = Color.clear;
+        }
 
 
         UpdateMesh();
@@ -303,5 +313,48 @@ public class SpurtEmitter : MonoBehaviour
         mesh.RecalculateNormals();
         //mesh.RecalculateBounds();
         meshFilter.mesh = mesh;
+    }
+
+    protected override void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        // Let's abuse a quaternion for a color container
+        Quaternion color = Quaternion.identity;
+        Quaternion rotation = transform.localRotation;
+        float r, g, b, a;
+        r = g = b = a = 0;
+
+
+        if (stream.isWriting)
+        {
+            // We're the lead
+            color = new Quaternion(shootingColor.r, shootingColor.g, shootingColor.b, shootingColor.a);
+            r = shootingColor.r;
+            g = shootingColor.g;
+            b = shootingColor.b;
+            a = shootingColor.a;
+
+            stream.Serialize(ref r);
+            stream.Serialize(ref g);
+            stream.Serialize(ref b);
+            stream.Serialize(ref a);
+            stream.Serialize(ref rotation);
+        }
+        else
+        {
+            // We're the copy-cat
+            stream.Serialize(ref r);
+            stream.Serialize(ref g);
+            stream.Serialize(ref b);
+            stream.Serialize(ref a);
+            stream.Serialize(ref rotation);
+
+            shootingColor = new Color(
+                r < 0.1f ? 0 : 1,
+                g < 0.1f ? 0 : 1,
+                b < 0.1f ? 0 : 1,
+                a < 0.1f ? 0 : 1
+            );
+            transform.localRotation = rotation;
+        }
     }
 }

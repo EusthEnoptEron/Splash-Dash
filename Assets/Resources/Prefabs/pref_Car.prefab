@@ -316,9 +316,9 @@ GameObject:
   - 114: {fileID: 11419710}
   - 114: {fileID: 11447442}
   - 114: {fileID: 11410250}
-  - 148: {fileID: 14867484}
+  - 148: {fileID: 14824198}
   m_Layer: 0
-  m_Name: Car
+  m_Name: pref_Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -370,10 +370,10 @@ GameObject:
   - 23: {fileID: 2376966}
   - 33: {fileID: 3303694}
   - 114: {fileID: 11409106}
-  - 114: {fileID: 11412060}
   - 120: {fileID: 12049424}
   - 114: {fileID: 11439820}
   - 114: {fileID: 11447012}
+  - 148: {fileID: 14841306}
   m_Layer: 0
   m_Name: Paint Gun
   m_TagString: Untagged
@@ -963,7 +963,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132014}
   m_LocalRotation: {x: 0, y: -.999164045, z: 0, w: .0408813283}
-  m_LocalPosition: {x: 77.8700027, y: 6.5999999, z: 17.5799999}
+  m_LocalPosition: {x: 72.7300034, y: 22, z: 11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 456196}
@@ -3125,7 +3125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emitter: {fileID: 11409106}
-  paintBrush: {fileID: 11412060}
+  paintBrush: {fileID: 0}
   maxSteer: 50
   maxTilt: 50
 --- !u!114 &11405688
@@ -3178,7 +3178,6 @@ MonoBehaviour:
   count: 150
   startVelocity: 15
   sides: 50
-  shooting: 0
   radius: .0399999991
   radiusGrowthSpeed: 1
 --- !u!114 &11410250
@@ -3204,18 +3203,6 @@ MonoBehaviour:
   maxRolloffDistance: 500
   dopplerLevel: 1
   useDoppler: 1
---- !u!114 &11412060
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b64abd22eb7824db02f849504b2f32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  computeShader: {fileID: 7200000, guid: 92b45cefbc56cb94abd529b872ec4509, type: 3}
 --- !u!114 &11419074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3424,7 +3411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89175ae46346eee48be165170e88bdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintBrush: {fileID: 11412060}
+  paintBrush: {fileID: 0}
 --- !u!120 &12049424
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -3578,7 +3565,7 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 1
   m_Enabled: 1
---- !u!148 &14867484
+--- !u!148 &14824198
 NetworkView:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3587,6 +3574,18 @@ NetworkView:
   m_Enabled: 1
   m_StateSynchronization: 1
   m_Observed: {fileID: 402726}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
+--- !u!148 &14841306
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133798}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 498796}
   m_ViewID:
     m_ID: 0
     m_Type: 0

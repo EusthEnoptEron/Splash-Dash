@@ -29,7 +29,7 @@ public class SimpleControls : MonoBehaviour {
             foreach (var mat in materials) mat.color = Color.Lerp(mat.color, color, Time.deltaTime * 10); ;
         }
 
-        emitter.shooting = Input.GetKey(KeyCode.Space);
+        //emitter.shooting = Input.GetKey(KeyCode.Space);
 
         float steer = Mathf.Clamp01(Input.mousePosition.x / Screen.width) - 0.5f;
         float tilt = Mathf.Clamp01(Input.mousePosition.y / Screen.height) - 0.5f;

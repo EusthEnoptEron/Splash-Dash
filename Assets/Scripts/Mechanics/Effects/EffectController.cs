@@ -13,6 +13,10 @@ public class EffectController : MonoBehaviour {
             effect.enabled = false;
         }
 	}
+    void Start()
+    {
+        paintBrush = PaintBrush.Locate();
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -13,8 +13,16 @@ public class PaintPathRenderer : MonoBehaviour {
         emitter = GetComponent<SpurtEmitter>();
         renderer = GetComponent<LineRenderer>();
 
-        renderer.SetVertexCount(vertexCount);
-        renderer.useWorldSpace = true;
+        if (emitter.IsRemoteControlled)
+        {
+            GameObject.Destroy(this);
+            GameObject.Destroy(renderer);
+        }
+        else
+        {
+            renderer.SetVertexCount(vertexCount);
+            renderer.useWorldSpace = true;
+        }
 	}
 	
 	// Update is called once per frame
