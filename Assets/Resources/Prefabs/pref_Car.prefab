@@ -432,6 +432,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &140732
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489086}
+  m_Layer: 0
+  m_Name: Tank Meshes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &143322
 GameObject:
   m_ObjectHideFlags: 1
@@ -788,6 +803,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &187816
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 440078}
+  - 23: {fileID: 2389194}
+  - 33: {fileID: 3355862}
+  - 114: {fileID: 11438938}
+  m_Layer: 0
+  m_Name: Tank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &188190
 GameObject:
   m_ObjectHideFlags: 1
@@ -949,6 +982,7 @@ Transform:
   - {fileID: 438736}
   - {fileID: 451678}
   - {fileID: 430144}
+  - {fileID: 489086}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &404360
@@ -1250,6 +1284,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 430144}
   m_RootOrder: 3
+--- !u!4 &440078
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.141000003, y: .73299998, z: -.448000014}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 489086}
+  m_RootOrder: 0
 --- !u!4 &441002
 Transform:
   m_ObjectHideFlags: 1
@@ -1523,6 +1569,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 430144}
   m_RootOrder: 2
+--- !u!4 &489086
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140732}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 440078}
+  m_Father: {fileID: 402726}
+  m_RootOrder: 7
 --- !u!4 &490262
 Transform:
   m_ObjectHideFlags: 1
@@ -2327,7 +2386,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e53132578d0ead84191ec8714aa3797d, type: 2}
+  - {fileID: 2100000, guid: 68f7a530160612d479954be08948daa2, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2425,6 +2484,30 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: e53132578d0ead84191ec8714aa3797d, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!23 &2389194
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187816}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 32b7269840b6d4449886e3b375ccd750, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2671,6 +2754,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155074}
   m_Mesh: {fileID: 4300018, guid: de969e304cca66f43b712b17aa683666, type: 3}
+--- !u!33 &3355862
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187816}
+  m_Mesh: {fileID: 0}
 --- !u!33 &3356972
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -3294,6 +3384,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
   skidParticles: {fileID: 0}
+--- !u!114 &11438938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff883dc2a2976de42812e0e50e06e2a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: .0500000007
+  fillState: .5
+  widthSegments: 50
+  heightSegments: 50
 --- !u!114 &11439820
 MonoBehaviour:
   m_ObjectHideFlags: 1
