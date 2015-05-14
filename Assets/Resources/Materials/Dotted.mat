@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Dotted
-  m_Shader: {fileID: 10751, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHATEST_ON
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2450
@@ -18,7 +18,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: b4f992a2f7accd24daaff41853a89005, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1000, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
