@@ -8,7 +8,6 @@ public class SpurtEmitter : NetworkBehaviour
 {
     class SpurtPosition
     {
-
         public Vector3 Position;
         public Vector3 Velocity;
         public float Radius;
@@ -65,6 +64,8 @@ public class SpurtEmitter : NetworkBehaviour
     public float radius = 0.1f;
     private float prevRadius = 0.1f;
     public float radiusGrowthSpeed = 1;
+    public Transform gunMesh;
+    private Quaternion gunStartOrientation;
 
     private Color shootingColor = Color.clear;
     
@@ -85,6 +86,8 @@ public class SpurtEmitter : NetworkBehaviour
         renderer = GetComponent<MeshRenderer>();
         meshFilter = GetComponent<MeshFilter>();
         rigidbody = GetComponentInParent<Rigidbody>();
+
+        gunStartOrientation = gunMesh.rotation;
 
         //mesh = meshFilter.mesh;
         
@@ -193,7 +196,8 @@ public class SpurtEmitter : NetworkBehaviour
             shootingColor = Color.clear;
         }
 
-
+        //gunMesh.rotation = gunStartOrientation *  Quaternion.Inverse(gunStartOrientation) * transform.rotation;
+        gunMesh.rotation = transform.rotation * Quaternion.Inverse(Quaternion.LookRotation(-Vector3.up, Vector3.forward));
         UpdateMesh();
     }
 

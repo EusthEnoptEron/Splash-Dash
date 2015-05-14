@@ -27,6 +27,11 @@ ModelImporter:
     100038: Cylinder_008
     100040: Sphere_000
     100042: Sphere_002
+    100044: BezierCircle_002
+    100046: Gun
+    100048: Gun_001
+    100050: Lamellen
+    100052: Sphere
     400000: BezierCircle
     400002: BezierCircle_001
     400004: //RootNode
@@ -49,6 +54,11 @@ ModelImporter:
     400038: Cylinder_008
     400040: Sphere_000
     400042: Sphere_002
+    400044: BezierCircle_002
+    400046: Gun
+    400048: Gun_001
+    400050: Lamellen
+    400052: Sphere
     2300000: BezierCircle
     2300002: BezierCircle_001
     2300004: Cube
@@ -70,6 +80,11 @@ ModelImporter:
     2300036: Cylinder_008
     2300038: Sphere_000
     2300040: Sphere_002
+    2300042: BezierCircle_002
+    2300044: Gun
+    2300046: Gun_001
+    2300048: Lamellen
+    2300050: Sphere
     3300000: BezierCircle
     3300002: BezierCircle_001
     3300004: Cube
@@ -91,6 +106,11 @@ ModelImporter:
     3300036: Cylinder_008
     3300038: Sphere_000
     3300040: Sphere_002
+    3300042: BezierCircle_002
+    3300044: Gun
+    3300046: Gun_001
+    3300048: Lamellen
+    3300050: Sphere
     4300000: Sphere_002
     4300002: Cube_007
     4300004: BezierCircle_001
@@ -112,6 +132,11 @@ ModelImporter:
     4300036: Cube_002
     4300038: Cylinder_004
     4300040: Cylinder
+    4300042: Gun_001
+    4300044: Gun
+    4300046: Sphere
+    4300048: Lamellen
+    4300050: BezierCircle_002
     7400000: Default Take
     9500000: //RootNode
   materials:

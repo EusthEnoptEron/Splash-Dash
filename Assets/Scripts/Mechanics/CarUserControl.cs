@@ -25,6 +25,11 @@ public class CarUserControl : NetworkBehaviour
         rigidbody = GetComponent<Rigidbody>();
         // get the car controller
         m_Car = GetComponent<CarController>();
+
+        if (!IsRemoteControlled)
+        {
+            
+        }
     }
 
 
@@ -32,6 +37,11 @@ public class CarUserControl : NetworkBehaviour
     {
         if (!IsRemoteControlled)
         {
+            // Disable mouse
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+            
+
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
