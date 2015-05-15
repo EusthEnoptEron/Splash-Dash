@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
+using System.Linq;
 
 internal enum CarDriveType
 {
@@ -122,6 +123,20 @@ public class CarController : MonoBehaviour
         var revsRangeMin = ULerp(0f, m_RevRangeBoundary, CurveFactor(gearNumFactor));
         var revsRangeMax = ULerp(m_RevRangeBoundary, 1f, gearNumFactor);
         Revs = ULerp(revsRangeMin, revsRangeMax, m_GearFactor);
+    }
+
+    public bool IsGrounded
+    {
+        get
+        {
+            return m_WheelColliders.Any(wheel =>
+            {
+                return wheel.isGrounded;
+                //WheelHit wheelhit;
+                //wheel.GetGroundHit(out wheelhit);
+                //return wheelhit.normal != Vector3.zero;
+            });
+        }
     }
 
 

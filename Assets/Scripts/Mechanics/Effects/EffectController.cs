@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class EffectController : MonoBehaviour {
-    public PaintBrush paintBrush;
+    private PaintBrush _paintBrush;
+    private CarController _car;
     private Effect[] _effects;
 
 	// Use this for initialization
@@ -15,27 +16,39 @@ public class EffectController : MonoBehaviour {
 	}
     void Start()
     {
-        paintBrush = PaintBrush.Locate();
+        _paintBrush = PaintBrush.Locate();
+        _car = GetComponentInParent<CarController>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        var currentColor = paintBrush.GetColor(transform.position);
-
-        Effect activeEffect = null;
-
-        // First, disable all effects that are inactive
-        foreach (var effect in _effects)
+        //Debug.Log(_car.IsGrounded);
+        if (_car.IsGrounded)
         {
-            if (!CompareColor(currentColor, effect.color))
-                effect.enabled = false;
-            else
-                activeEffect = effect;
+            var currentColor = _paintBrush.GetColor(transform.position);
+
+            Effect activeEffect = null;
+
+            // First, disable all effects that are inactive
+            foreach (var effect in _effects)
+            {
+                if (!CompareColor(currentColor, effect.color))
+                    effect.enabled = false;
+                else
+                    activeEffect = effect;
+            }
+
+            // Now, enable active effect
+            if (activeEffect != null)
+                activeEffect.enabled = true;
         }
-        
-        // Now, enable active effect
-        if (activeEffect != null)
-            activeEffect.enabled = true;
+        //else
+        //{
+        //    foreach (var effect in _effects)
+        //    {
+        //        effect.enabled = false;
+        //    }
+        //}
 	}
 
     bool CompareColor(Color c1, Color c2)
