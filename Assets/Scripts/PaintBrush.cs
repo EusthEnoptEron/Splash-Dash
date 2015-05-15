@@ -22,7 +22,12 @@ public class PaintBrush : NetworkBehaviour {
 
     public static PaintBrush Locate()
     {
-        return GameObject.FindGameObjectWithTag("Paintbrush").GetComponent<PaintBrush>();
+        var paintbrushObj = GameObject.FindGameObjectWithTag("Paintbrush");
+        if (paintbrushObj == null)
+        {
+            paintbrushObj = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/pref_PaintBrush"));
+        }
+        return paintbrushObj.GetComponent<PaintBrush>();
     }
 	// Use this for initialization
     void Start () {
@@ -74,7 +79,7 @@ public class PaintBrush : NetworkBehaviour {
             }
         }
 
-        if(forward)
+        if(forward && NetworkController.IsConnected)
             networkView.RPC("PaintRPC", RPCMode.OthersBuffered, worldPos, color.r, color.g, color.b, color.a, width);
     }
 

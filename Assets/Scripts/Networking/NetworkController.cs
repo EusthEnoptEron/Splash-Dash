@@ -9,6 +9,7 @@ public class NetworkController : MonoBehaviour {
 
     public GameObject carPrefab;
     public GameObject paintbrushPrefab;
+    public static bool IsConnected = false;
 
 	// Use this for initialization
     private void Start()
@@ -47,11 +48,15 @@ public class NetworkController : MonoBehaviour {
     }
     void OnConnectedToServer()
     {
+        IsConnected = true;
+
         SpawnPlayer();
     }
 
     void OnServerInitialized()
     {
+        IsConnected = true;
+
         var paintbrush = Network.Instantiate(paintbrushPrefab, Vector3.zero, Quaternion.identity, 0) as GameObject;
         paintbrush.transform.SetParent(transform, false);
 

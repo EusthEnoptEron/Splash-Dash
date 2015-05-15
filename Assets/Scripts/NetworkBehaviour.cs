@@ -15,7 +15,7 @@ public abstract class NetworkBehaviour : MonoBehaviour {
     {
         get
         {
-            return networkView && networkView.enabled && !networkView.isMine;
+            return NetworkController.IsConnected && networkView && networkView.enabled && !networkView.isMine;
         }
     }
 
