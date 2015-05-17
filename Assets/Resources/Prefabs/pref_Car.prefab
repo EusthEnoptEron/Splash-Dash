@@ -370,6 +370,7 @@ GameObject:
   - 114: {fileID: 11447442}
   - 114: {fileID: 11410250}
   - 148: {fileID: 14824198}
+  - 114: {fileID: 11442242}
   m_Layer: 0
   m_Name: pref_Car
   m_TagString: Untagged
@@ -2872,7 +2873,8 @@ AudioSource:
   m_GameObject: {fileID: 133346}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24398170, guid: d9320f041a8052a4c803f5941aaa021f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: bd9566abdbf08834281bfb4ea8b92a5d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2941,7 +2943,8 @@ AudioSource:
   m_GameObject: {fileID: 107348}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24398170, guid: d9320f041a8052a4c803f5941aaa021f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: bd9566abdbf08834281bfb4ea8b92a5d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3010,7 +3013,8 @@ AudioSource:
   m_GameObject: {fileID: 177510}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24398170, guid: d9320f041a8052a4c803f5941aaa021f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: bd9566abdbf08834281bfb4ea8b92a5d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3079,7 +3083,8 @@ AudioSource:
   m_GameObject: {fileID: 155528}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24398170, guid: d9320f041a8052a4c803f5941aaa021f,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: bd9566abdbf08834281bfb4ea8b92a5d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3240,6 +3245,7 @@ MonoBehaviour:
   startVelocity: 15
   sides: 50
   radius: .0399999991
+  shootDelay: .100000001
   radiusGrowthSpeed: 1
   gunMesh: {fileID: 478926}
 --- !u!114 &11410250
@@ -3265,6 +3271,7 @@ MonoBehaviour:
   maxRolloffDistance: 500
   dopplerLevel: 1
   useDoppler: 1
+  outputAudioMixer: {fileID: 24324326, guid: d9320f041a8052a4c803f5941aaa021f, type: 2}
 --- !u!114 &11419074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3355,6 +3362,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
   skidParticles: {fileID: 0}
+--- !u!114 &11442242
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfe5ef3e33028d4e8fd33a3ba8ed030, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11447012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3475,7 +3493,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89175ae46346eee48be165170e88bdf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintBrush: {fileID: 0}
 --- !u!146 &14612502
 WheelCollider:
   m_ObjectHideFlags: 1

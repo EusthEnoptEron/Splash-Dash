@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof (CarController))]
@@ -39,6 +40,7 @@ public class CarAudio : MonoBehaviour
     public float maxRolloffDistance = 500;                                      // The maximum distance where rollof starts to take place
     public float dopplerLevel = 1;                                              // The mount of doppler effect used in the audio
     public bool useDoppler = true;                                              // Toggle for using doppler
+    public AudioMixerGroup outputAudioMixer;
 
     private AudioSource m_LowAccel; // Source for the low acceleration sounds
     private AudioSource m_LowDecel; // Source for the low deceleration sounds
@@ -169,6 +171,7 @@ public class CarAudio : MonoBehaviour
         source.minDistance = 5;
         source.maxDistance = maxRolloffDistance;
         source.dopplerLevel = 0;
+        source.outputAudioMixerGroup = outputAudioMixer;
         return source;
     }
 
