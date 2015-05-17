@@ -24,7 +24,6 @@ public class SpurtEmitter : NetworkBehaviour
             Velocity = velocity;
             Radius = radius;
             Color = color;
-            
         }
 
 
@@ -62,6 +61,10 @@ public class SpurtEmitter : NetworkBehaviour
     public float startVelocity = 10;
     public int sides = 8;
     public float radius = 0.1f;
+    public float shootDelay = 0.4f;
+
+    private float _shooting = 0;
+
     private float prevRadius = 0.1f;
     public float radiusGrowthSpeed = 1;
     public Transform gunMesh;
@@ -157,6 +160,8 @@ public class SpurtEmitter : NetworkBehaviour
         }
     }
 
+    private List<PaintTank> startTanks = new List<PaintTank>();
+
     // Update is called once per frame
     void LateUpdate()
     {
@@ -167,23 +172,31 @@ public class SpurtEmitter : NetworkBehaviour
 
         UpdatePositions();
 
-        var validTanks = tanks.Where(tank => !tank.IsEmpty && tank.Shooting);
+        var validTanks = tanks.Where(tank => !tank.IsEmpty && tank.IsShootable);
+        var minimalTanks = validTanks.Union(startTanks).Distinct().Where(tank => !tank.IsEmpty && (tank.IsShootable || (Time.time - tank.ReleaseTime) < shootDelay * 2 ) );
 
+        _shooting = validTanks.Count() > 0 
+            ? Mathf.MoveTowards(_shooting, 1, Time.deltaTime / (shootDelay * 2) ) 
+            : Mathf.MoveTowards(_shooting, 0, Time.deltaTime / (shootDelay * 2) );
 
-        if ((!IsRemoteControlled && validTanks.Count() > 0) || (IsRemoteControlled && shootingColor != Color.clear))
+        if (minimalTanks.Count() == 0) _shooting = 0;
+
+        if ((!IsRemoteControlled && _shooting >= 0.5f) || (IsRemoteControlled && shootingColor != Color.clear))
         {
             if (!IsRemoteControlled)
             {
-                int tankCount = validTanks.Count();
-                shootingColor = validTanks.Select(t => t.color).Aggregate((c1, c2) =>
+                int tankCount = minimalTanks.Count();
+
+                shootingColor = new Color(0,0,0,1);
+                foreach (var tank in minimalTanks)
                 {
-                    c1.r += c2.r;
-                    c1.g += c2.g;
-                    c1.b += c2.b;
-                    return c1;
-                });
+                    tank.Consume(Time.deltaTime);
+                    shootingColor.r += tank.color.r;
+                    shootingColor.g += tank.color.g;
+                    shootingColor.b += tank.color.b;
+                }
             }
-            shootingColor.a = 1;
+            startTanks = minimalTanks.ToList();
 
             positions.AddFirst(new SpurtPosition(transform.position, Inertia + transform.forward * startVelocity, prevRadius, shootingColor/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
             {
@@ -192,6 +205,7 @@ public class SpurtEmitter : NetworkBehaviour
         }
         else
         {
+            startTanks.Clear();
             positions.AddFirst((SpurtPosition)null);
             shootingColor = Color.clear;
         }
