@@ -5,6 +5,7 @@ public class NetworkController : MonoBehaviour {
     private const string TYPE_NAME = "BFH.GameDev.SplashDash";
     private const string GAME_NAME = "Splash Dash";
     private HostData[] hostList;
+    private RaceController race;
 
 
     public GameObject carPrefab;
@@ -14,7 +15,7 @@ public class NetworkController : MonoBehaviour {
 	// Use this for initialization
     private void Start()
     {
- 
+        race = GetComponent<RaceController>();
     }
 
     public void StartServer()
@@ -51,6 +52,7 @@ public class NetworkController : MonoBehaviour {
         IsConnected = true;
 
         SpawnPlayer();
+
     }
 
     void OnServerInitialized()
@@ -61,6 +63,9 @@ public class NetworkController : MonoBehaviour {
         paintbrush.transform.SetParent(transform, false);
 
         SpawnPlayer();
+
+        race.StartRace();
+
     }
 
     private void SpawnPlayer()
