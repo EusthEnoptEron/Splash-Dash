@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityStandardAssets.Vehicles.Car;
 using System.Linq;
+using System.Collections.Generic;
 
 internal enum CarDriveType
 {
@@ -54,6 +55,13 @@ public class CarController : MonoBehaviour
     public float MaxSpeed { get { return m_Topspeed; } set { m_Topspeed = value; } }
     public float Revs { get; private set; }
     public float AccelInput { get; private set; }
+    public IEnumerable<WheelCollider> Wheels
+    {
+        get
+        {
+            return m_WheelColliders;
+        }
+    }
 
     // Use this for initialization
     private void Start()
