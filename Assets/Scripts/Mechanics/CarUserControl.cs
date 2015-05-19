@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Linq;
+using UnityStandardAssets.Vehicles.Car;
 
 [RequireComponent(typeof(CarController))]
 public class CarUserControl : NetworkBehaviour

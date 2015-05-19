@@ -2295,7 +2295,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 132014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ad58f65acfd8e24eb25ca17395a92f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 20fa55eb64c5cea4aa3c71ae19c434bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   engineSoundStyle: 1
@@ -2310,7 +2310,6 @@ MonoBehaviour:
   maxRolloffDistance: 500
   dopplerLevel: 1
   useDoppler: 1
-  outputAudioMixer: {fileID: 24324326, guid: d9320f041a8052a4c803f5941aaa021f, type: 2}
 --- !u!114 &11419074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2331,7 +2330,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 132014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6681c405a19873408dc1e15fe525f49, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ea65b38d485c374caa584a03f1de571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_CarDriveType: 2

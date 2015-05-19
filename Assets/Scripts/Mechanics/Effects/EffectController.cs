@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Vehicles.Car;
 
 public class EffectController : MonoBehaviour {
     private PaintBrush _paintBrush;
