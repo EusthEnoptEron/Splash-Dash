@@ -5,7 +5,7 @@ using System.Collections;
 public abstract class NetworkBehaviour : MonoBehaviour {
     protected NetworkView networkView;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         networkView = GetComponent<NetworkView>();
         networkView.observed = this;

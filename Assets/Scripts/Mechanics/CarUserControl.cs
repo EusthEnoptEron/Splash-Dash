@@ -28,10 +28,27 @@ public class CarUserControl : NetworkBehaviour
         // get the car controller
         m_Car = GetComponent<CarController>();
 
+        RaceController.Locate().RegisterCar(networkView.owner, this);
+
         if (!IsRemoteControlled)
         {
-            
         }
+    }
+
+
+    [RPC]
+    public void SetPosition(Vector3 position, Quaternion rotation)
+    {
+        transform.position = position;
+        transform.rotation = rotation;
+    }
+
+    [RPC]
+    public void SetState(bool active)
+    {
+        enabled = active;
+
+        GetComponentInChildren<SpurtEmitter>().enabled = active;
     }
 
 

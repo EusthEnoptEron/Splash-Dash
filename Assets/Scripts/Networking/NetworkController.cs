@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NetworkController : MonoBehaviour {
     private const string TYPE_NAME = "BFH.GameDev.SplashDash";
@@ -10,7 +11,15 @@ public class NetworkController : MonoBehaviour {
 
     public GameObject carPrefab;
     public GameObject paintbrushPrefab;
-    public static bool IsConnected = false;
+    public static bool IsConnected
+    {
+        get
+        {
+            return Network.isClient || Network.isServer;
+        }
+    }
+
+    public Dictionary<NetworkPlayer, SplashPlayer> players = new Dictionary<NetworkPlayer, SplashPlayer>();
 
 	// Use this for initialization
     private void Start()
@@ -26,7 +35,7 @@ public class NetworkController : MonoBehaviour {
 
     void OnGUI()
     {
-        if (!Network.isClient && !Network.isServer)
+        if (!IsConnected)
         {
             if (GUILayout.Button("Start Server"))
                 StartServer();
@@ -41,30 +50,34 @@ public class NetworkController : MonoBehaviour {
                 }
             }
         }
+        else if (Network.isServer && race.State == RaceState.Preparing)
+        {
+            if (GUILayout.Button("Start Game"))
+            {
+                race.StartRace();
+            }
+        }
+
     }
+
     void OnMasterServerEvent(MasterServerEvent msEvent)
     {
         if (msEvent == MasterServerEvent.HostListReceived)
             hostList = MasterServer.PollHostList();
     }
+
     void OnConnectedToServer()
     {
-        IsConnected = true;
-
         SpawnPlayer();
 
     }
 
     void OnServerInitialized()
     {
-        IsConnected = true;
-
         var paintbrush = Network.Instantiate(paintbrushPrefab, Vector3.zero, Quaternion.identity, 0) as GameObject;
         paintbrush.transform.SetParent(transform, false);
 
         SpawnPlayer();
-
-        race.StartRace();
 
     }
 

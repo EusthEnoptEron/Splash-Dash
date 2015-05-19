@@ -37,6 +37,34 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Fresnel
+        second:
+          m_Texture: {fileID: 2800000, guid: fb6566c21f717904f83743a5a76dd0b0, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ReflectiveColor
+        second:
+          m_Texture: {fileID: 2800000, guid: bf6cdaebf8082234993aa48478abd96d, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ReflectionTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 5, y: 5}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _RefractionTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _MetallicGlossMap
         second:
           m_Texture: {fileID: 0}
@@ -77,34 +105,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ReflectionTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 5, y: 5}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _RefractionTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Fresnel
-        second:
-          m_Texture: {fileID: 2800000, guid: fb6566c21f717904f83743a5a76dd0b0, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ReflectiveColor
-        second:
-          m_Texture: {fileID: 2800000, guid: bf6cdaebf8082234993aa48478abd96d, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -122,6 +122,26 @@ Material:
         first:
           name: _DstBlend
         second: 0
+      data:
+        first:
+          name: _WaveScale
+        second: .063000001
+      data:
+        first:
+          name: _ReflDistort
+        second: .790000021
+      data:
+        first:
+          name: _RefrDistort
+        second: .209999993
+      data:
+        first:
+          name: _FresnelScale
+        second: .75
+      data:
+        first:
+          name: _GerstnerIntensity
+        second: 1
       data:
         first:
           name: _Glossiness
@@ -162,26 +182,6 @@ Material:
         first:
           name: _Mode
         second: 0
-      data:
-        first:
-          name: _FresnelScale
-        second: .75
-      data:
-        first:
-          name: _GerstnerIntensity
-        second: 1
-      data:
-        first:
-          name: _WaveScale
-        second: .063000001
-      data:
-        first:
-          name: _ReflDistort
-        second: .790000021
-      data:
-        first:
-          name: _RefrDistort
-        second: .209999993
     m_Colors:
       data:
         first:
@@ -193,12 +193,16 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _EmissionColorUI
-        second: {r: 1, g: 1, b: 1, a: 1}
+          name: _RefrColor
+        second: {r: .0627451017, g: .458823562, b: .968627512, a: 1}
       data:
         first:
-          name: _SpecularColor
-        second: {r: .720000029, g: .720000029, b: .720000029, a: 1}
+          name: WaveSpeed
+        second: {r: 19, g: 9, b: -16, a: -7}
+      data:
+        first:
+          name: _HorizonColor
+        second: {r: .0627451017, g: .458823562, b: .968627512, a: 1}
       data:
         first:
           name: _DistortParams
@@ -233,6 +237,10 @@ Material:
         second: {r: .52849263, g: .845588207, b: .83246696, a: 0}
       data:
         first:
+          name: _SpecularColor
+        second: {r: .720000029, g: .720000029, b: .720000029, a: 1}
+      data:
+        first:
           name: _WorldLightDir
         second: {r: 0, g: .100000001, b: -.5, a: 0}
       data:
@@ -261,13 +269,5 @@ Material:
         second: {r: .100000001, g: .899999976, b: .5, a: .5}
       data:
         first:
-          name: _RefrColor
-        second: {r: .0627451017, g: .458823562, b: .968627512, a: 1}
-      data:
-        first:
-          name: WaveSpeed
-        second: {r: 19, g: 9, b: -16, a: -7}
-      data:
-        first:
-          name: _HorizonColor
-        second: {r: .0627451017, g: .458823562, b: .968627512, a: 1}
+          name: _EmissionColorUI
+        second: {r: 1, g: 1, b: 1, a: 1}
