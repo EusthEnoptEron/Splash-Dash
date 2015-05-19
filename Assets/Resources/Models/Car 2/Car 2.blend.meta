@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: f6bda925cc4fa7b45ad72438fee7aceb
+timeCreated: 1432037933
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BezierCircle_001
+    100002: BezierCurve
+    100004: BezierCurve_001
+    100006: //RootNode
+    100008: Cockbit
+    100010: Cube
+    100012: Cube_001
+    100014: Cylinder
+    100016: Cylinder_002
+    100018: Cylinder_003
+    100020: Cylinder_004
+    100022: Cylinder_005
+    100024: Cylinder_006
+    100026: Cylinder_007
+    100028: FrontWheelLeft
+    100030: FrontWheelRight
+    100032: Gun
+    100034: Gun_001
+    100036: Lamellen
+    100038: NurbsCircle
+    100040: Sphere
+    400000: BezierCircle_001
+    400002: BezierCurve
+    400004: BezierCurve_001
+    400006: //RootNode
+    400008: Cockbit
+    400010: Cube
+    400012: Cube_001
+    400014: Cylinder
+    400016: Cylinder_002
+    400018: Cylinder_003
+    400020: Cylinder_004
+    400022: Cylinder_005
+    400024: Cylinder_006
+    400026: Cylinder_007
+    400028: FrontWheelLeft
+    400030: FrontWheelRight
+    400032: Gun
+    400034: Gun_001
+    400036: Lamellen
+    400038: NurbsCircle
+    400040: Sphere
+    2300000: BezierCircle_001
+    2300002: BezierCurve
+    2300004: BezierCurve_001
+    2300006: Cockbit
+    2300008: Cube
+    2300010: Cube_001
+    2300012: Cylinder
+    2300014: Cylinder_002
+    2300016: Cylinder_003
+    2300018: Cylinder_004
+    2300020: Cylinder_005
+    2300022: Cylinder_006
+    2300024: Cylinder_007
+    2300026: FrontWheelLeft
+    2300028: FrontWheelRight
+    2300030: Gun
+    2300032: Gun_001
+    2300034: Lamellen
+    2300036: NurbsCircle
+    2300038: Sphere
+    3300000: BezierCircle_001
+    3300002: BezierCurve
+    3300004: BezierCurve_001
+    3300006: Cockbit
+    3300008: Cube
+    3300010: Cube_001
+    3300012: Cylinder
+    3300014: Cylinder_002
+    3300016: Cylinder_003
+    3300018: Cylinder_004
+    3300020: Cylinder_005
+    3300022: Cylinder_006
+    3300024: Cylinder_007
+    3300026: FrontWheelLeft
+    3300028: FrontWheelRight
+    3300030: Gun
+    3300032: Gun_001
+    3300034: Lamellen
+    3300036: NurbsCircle
+    3300038: Sphere
+    4300000: Cylinder_007
+    4300002: FrontWheelLeft
+    4300004: Gun_001
+    4300006: Sphere
+    4300008: Gun
+    4300010: Lamellen
+    4300012: Cockbit
+    4300014: Cylinder_005
+    4300016: NurbsCircle
+    4300018: Cube_001
+    4300020: Cube
+    4300022: Cylinder_006
+    4300024: Cylinder
+    4300026: BezierCurve_001
+    4300028: BezierCurve
+    4300030: Cylinder_004
+    4300032: Cylinder_003
+    4300034: Cylinder_002
+    4300036: FrontWheelRight
+    4300038: BezierCircle_001
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
