@@ -87,4 +87,11 @@ public class NetworkController : MonoBehaviour {
         var myCar = Network.Instantiate(carPrefab, transform.position, transform.rotation, 0) as GameObject;
         Camera.main.GetComponent<SmoothFollow>().target = myCar.transform;
     }
+
+    private void OnPlayerDisconnected(NetworkPlayer player)
+    {
+        Debug.Log("Clean up after player " + player);
+        Network.RemoveRPCs(player);
+        Network.DestroyPlayerObjects(player);
+    }
 }
