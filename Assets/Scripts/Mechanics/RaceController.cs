@@ -13,8 +13,8 @@ public enum RaceState
     Running,
     Ended
 }
-
-public class RaceController : MonoBehaviour {
+    
+public class RaceController : NetworkBehaviour {
     public GameObject prefDigit;
     public Animator countdownGUI;
 
@@ -35,7 +35,10 @@ public class RaceController : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Awake () {
+	protected override void Awake () {
+        base.Awake();
+        networkView.stateSynchronization = NetworkStateSynchronization.Off;
+
         State = RaceState.Preparing;
 
         var startPositionsContainer = GameObject.FindGameObjectWithTag("Start Positions");
@@ -98,11 +101,17 @@ public class RaceController : MonoBehaviour {
 
     }
 
+    [RPC]
     public void StartRace()
     {
         if (State == RaceState.Preparing)
         {
             StartCoroutine(RaceCoroutine());
+        }
+
+        if (!Network.isServer)
+        {
+            networkView.RPC("StartRace", RPCMode.Others);
         }
     }
 
@@ -165,5 +174,10 @@ public class RaceController : MonoBehaviour {
         {
             outline.effectColor = color - new Color(0.3f, 0.3f, 0.3f);
         }
+    }
+
+    protected override void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        throw new System.NotImplementedException();
     }
 }

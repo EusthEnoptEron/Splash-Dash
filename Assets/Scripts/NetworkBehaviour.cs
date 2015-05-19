@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(NetworkView))]
 public abstract class NetworkBehaviour : MonoBehaviour {
-    protected NetworkView networkView;
+    protected new NetworkView networkView;
 
     protected virtual void Awake()
     {
@@ -19,6 +19,6 @@ public abstract class NetworkBehaviour : MonoBehaviour {
         }
     }
 
-    protected abstract void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info);
+    protected virtual void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info) { }
 
 }

@@ -29,6 +29,12 @@ public class PaintBrush : NetworkBehaviour {
         }
         return paintbrushObj.GetComponent<PaintBrush>();
     }
+    protected override void Awake()
+    {
+        base.Awake();
+        networkView.stateSynchronization = NetworkStateSynchronization.Off;
+    }
+
 	// Use this for initialization
     void Start () {
        
