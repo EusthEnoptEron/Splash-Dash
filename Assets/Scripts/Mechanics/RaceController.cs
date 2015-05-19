@@ -16,7 +16,8 @@ public enum RaceState
     
 public class RaceController : NetworkBehaviour {
     public GameObject prefDigit;
-    public Animator countdownGUI;
+    public GameObject GUIPrefab;
+    private Animator GUI;
 
     private Transform[] startPositions = new Transform[0];
 
@@ -37,6 +38,7 @@ public class RaceController : NetworkBehaviour {
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
+
         networkView.stateSynchronization = NetworkStateSynchronization.Off;
 
         State = RaceState.Preparing;
@@ -50,6 +52,8 @@ public class RaceController : NetworkBehaviour {
         {
             Debug.LogError("Start positions not found!");
         }
+
+        GUI = GameObject.Instantiate<GameObject>(GUIPrefab).GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -117,6 +121,8 @@ public class RaceController : NetworkBehaviour {
 
     private IEnumerator RaceCoroutine()
     {
+
+
         State = RaceState.Starting;
 
         yield return StartCoroutine(DoCountdown());
@@ -135,7 +141,7 @@ public class RaceController : NetworkBehaviour {
 
     private IEnumerator DoCountdown()
     {
-        countdownGUI.SetTrigger("Start");
+        GUI.SetTrigger("Start");
 
         yield return new WaitForSeconds(2);
 
@@ -152,7 +158,7 @@ public class RaceController : NetworkBehaviour {
         yield return new WaitForSeconds(1);
 
         SendText("GO!", Color.white);
-        countdownGUI.SetBool("Done", true);
+        GUI.SetBool("Done", true);
 
         yield return new WaitForSeconds(1);
 
@@ -162,7 +168,7 @@ public class RaceController : NetworkBehaviour {
     private void SendText(string text, Color color)
     {
         var digit = GameObject.Instantiate<GameObject>(prefDigit);
-        digit.transform.SetParent(countdownGUI.transform, false);
+        digit.transform.SetParent(GUI.transform, false);
 
         var digitText = digit.GetComponentInChildren<Text>();
 
@@ -178,6 +184,6 @@ public class RaceController : NetworkBehaviour {
 
     protected override void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
-        throw new System.NotImplementedException();
+
     }
 }

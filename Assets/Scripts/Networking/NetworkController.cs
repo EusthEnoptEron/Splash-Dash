@@ -24,7 +24,6 @@ public class NetworkController : MonoBehaviour {
 	// Use this for initialization
     private void Start()
     {
-        race = GetComponent<RaceController>();
     }
 
     public void StartServer()
@@ -76,6 +75,8 @@ public class NetworkController : MonoBehaviour {
     {
         var paintbrush = Network.Instantiate(paintbrushPrefab, Vector3.zero, Quaternion.identity, 0) as GameObject;
         paintbrush.transform.SetParent(transform, false);
+
+        race = paintbrush.GetComponent<RaceController>();
 
         SpawnPlayer();
 

@@ -10,6 +10,8 @@ GameObject:
   - 4: {fileID: 406248}
   - 114: {fileID: 11422846}
   - 148: {fileID: 14871686}
+  - 114: {fileID: 11420168}
+  - 148: {fileID: 14806254}
   m_Layer: 0
   m_Name: pref_Paintbrush
   m_TagString: Paintbrush
@@ -29,6 +31,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11420168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e069c7c80a0cc4fbf8b88144fb21e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefDigit: {fileID: 176294, guid: 2886d165748c2ed4292e1c7ae7454298, type: 2}
+  GUIPrefab: {fileID: 160736, guid: 15a56dca62abe45458bc2f0caea39a57, type: 2}
 --- !u!114 &11422846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -41,6 +56,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   computeShader: {fileID: 7200000, guid: 92b45cefbc56cb94abd529b872ec4509, type: 3}
+--- !u!148 &14806254
+NetworkView:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140618}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 0}
+  m_ViewID:
+    m_ID: 0
+    m_Type: 0
 --- !u!148 &14871686
 NetworkView:
   m_ObjectHideFlags: 1
@@ -49,7 +76,7 @@ NetworkView:
   m_GameObject: {fileID: 140618}
   m_Enabled: 1
   m_StateSynchronization: 1
-  m_Observed: {fileID: 406248}
+  m_Observed: {fileID: 0}
   m_ViewID:
     m_ID: 0
     m_Type: 0

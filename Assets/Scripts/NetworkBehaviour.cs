@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 [RequireComponent(typeof(NetworkView))]
 public abstract class NetworkBehaviour : MonoBehaviour {
@@ -7,7 +8,7 @@ public abstract class NetworkBehaviour : MonoBehaviour {
 
     protected virtual void Awake()
     {
-        networkView = GetComponent<NetworkView>();
+        networkView = GetComponents<NetworkView>().First(view => view.observed == null);
         networkView.observed = this;
     }
 

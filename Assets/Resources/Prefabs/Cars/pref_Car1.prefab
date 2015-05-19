@@ -214,7 +214,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 402726}
   - 54: {fileID: 5458056}
-  - 114: {fileID: 11400856}
   - 114: {fileID: 11419710}
   - 114: {fileID: 11447442}
   - 114: {fileID: 11410250}
@@ -2218,21 +2217,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11400856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132014}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bb84515ff97c5342bdcc7e8621a290f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emitter: {fileID: 11409106}
-  paintBrush: {fileID: 0}
-  maxSteer: 50
-  maxTilt: 50
 --- !u!114 &11405688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2352,7 +2336,7 @@ MonoBehaviour:
   m_CentreOfMassOffset: {x: 0, y: 0, z: 0}
   m_MaximumSteerAngle: 40
   m_SteerHelper: .600000024
-  m_TractionControl: 1
+  m_TractionControl: 0
   m_FullTorqueOverAllWheels: 10000
   m_ReverseTorque: 500
   m_MaxHandbrakeTorque: 1e+08
@@ -2655,7 +2639,7 @@ NetworkView:
   m_GameObject: {fileID: 132014}
   m_Enabled: 1
   m_StateSynchronization: 1
-  m_Observed: {fileID: 402726}
+  m_Observed: {fileID: 0}
   m_ViewID:
     m_ID: 0
     m_Type: 0
@@ -2667,7 +2651,7 @@ NetworkView:
   m_GameObject: {fileID: 133798}
   m_Enabled: 1
   m_StateSynchronization: 1
-  m_Observed: {fileID: 498796}
+  m_Observed: {fileID: 0}
   m_ViewID:
     m_ID: 0
     m_Type: 0
