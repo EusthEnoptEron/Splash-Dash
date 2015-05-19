@@ -128,6 +128,7 @@ GameObject:
   - 4: {fileID: 191879755}
   - 114: {fileID: 191879754}
   - 82: {fileID: 191879756}
+  - 114: {fileID: 191879757}
   m_Layer: 0
   m_Name: Globals
   m_TagString: Untagged
@@ -230,6 +231,19 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &191879757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 191879753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e069c7c80a0cc4fbf8b88144fb21e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefDigit: {fileID: 176294, guid: 2886d165748c2ed4292e1c7ae7454298, type: 2}
+  countdownGUI: {fileID: 0}
 --- !u!1 &254005821
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,11 +745,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &1418289582
+--- !u!1 &1418289582 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100010, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 1418289581}
---- !u!1 &1418289583
+--- !u!1 &1418289583 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 1418289581}
