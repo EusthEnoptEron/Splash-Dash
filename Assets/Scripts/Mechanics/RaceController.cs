@@ -108,16 +108,14 @@ public class RaceController : NetworkBehaviour {
     [RPC]
     public void StartRace()
     {
-        Debug.Log("START RACE");
 
         if (State == RaceState.Preparing)
         {
             StartCoroutine(RaceCoroutine());
         }
 
-        if (!Network.isServer)
+        if (Network.isServer)
         {
-            Debug.Log("SEND RPC");
             networkView.RPC("StartRace", RPCMode.Others);
         }
     }
