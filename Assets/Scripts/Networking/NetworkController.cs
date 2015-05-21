@@ -85,6 +85,9 @@ public class NetworkController : MonoBehaviour {
     private void SpawnPlayer()
     {
         var myCar = Network.Instantiate(carPrefab, transform.position, transform.rotation, 0) as GameObject;
+        var myCockpit = myCar.GetComponent<Cockpit>();
+        myCockpit.SetName("Player #" + Random.Range(1, 1000));
+
         Camera.main.GetComponent<SmoothFollow>().target = myCar.transform;
     }
 

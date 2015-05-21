@@ -6,7 +6,7 @@ using UnityStandardAssets.Vehicles.Car;
 using UnityStandardAssets.Utility;
 
 [RequireComponent(typeof(CarController))]
-public class CarUserControl : NetworkBehaviour
+public class Cockpit : NetworkBehaviour
 {
     private CarController m_Car; // the car controller we want to use
     private new Rigidbody rigidbody;
@@ -21,9 +21,23 @@ public class CarUserControl : NetworkBehaviour
     private Quaternion _syncRotEnd = Quaternion.identity;
     private bool _blinking = false;
     private WaypointContainer _circuit;
-    private Waypoint _currentWaypoint;
+    public Waypoint currentWaypoint { get; private set; }
+    public Waypoint nextWaypoint { get; private set; }
+
     public int Laps { get; private set; }
 
+    private RaceController _race;
+
+    [RPC]
+    public void SetName(string name)
+    {
+        this.name = name;
+
+        if (!IsRemoteControlled)
+        {
+            networkView.RPC("SetName", RPCMode.OthersBuffered, name);
+        }
+    }
 
     private void Awake()
     {
@@ -33,13 +47,15 @@ public class CarUserControl : NetworkBehaviour
         // get the car controller
         m_Car = GetComponent<CarController>();
         _circuit = GameObject.FindGameObjectWithTag("Circuit").GetComponent<WaypointContainer>();
-        _currentWaypoint = _circuit.waypoints.First();
 
+        currentWaypoint = _circuit.waypoints.Last();
+        nextWaypoint = _circuit.GetNextWaypoint(currentWaypoint);
     }
 
     private void Start()
     {
-        RaceController.Locate().RegisterCar(networkView.owner, this);
+        _race = RaceController.Locate();
+        _race.RegisterCar(networkView.owner, this);
     }
 
     [RPC]
@@ -57,6 +73,21 @@ public class CarUserControl : NetworkBehaviour
         GetComponentInChildren<SpurtEmitter>().enabled = active;
     }
 
+    public float Progress
+    {
+        get
+        {
+            float offset = Laps / (float)_race.Laps;
+            var wpDistance =  nextWaypoint.transform.position - currentWaypoint.transform.position;
+            var myDistance = transform.position - currentWaypoint.transform.position;
+            float progress = Vector3.Dot(wpDistance.normalized, myDistance) / wpDistance.magnitude;
+
+            return Mathf.Clamp01(
+                (Laps + (_circuit.IsLast(currentWaypoint) ? 0 : currentWaypoint.id  + progress) / (float)_circuit.waypoints.Count) / _race.Laps 
+            );
+        }
+    }
+
     private void OnTriggerEnter(Collider collider)
     {
         var waypoint = collider.GetComponent<Waypoint>();
@@ -64,22 +95,19 @@ public class CarUserControl : NetworkBehaviour
         {
             if (IsNextWaypoint(waypoint))
             {
-                _currentWaypoint = waypoint;
-                if (IsLast(waypoint)) Laps++;
+                currentWaypoint = waypoint;
+                nextWaypoint = _circuit.GetNextWaypoint(currentWaypoint);
+
+                if (_circuit.IsLast(waypoint)) Laps++;
             }
         }
     }
 
     private bool IsNextWaypoint(Waypoint waypoint)
     {
-        return waypoint.id == _currentWaypoint.id + 1
-            || (IsLast(_currentWaypoint) && waypoint.id == 0);
+        return waypoint.id == nextWaypoint.id;
     }
 
-    private bool IsLast(Waypoint waypoint)
-    {
-        return _currentWaypoint.id == _circuit.waypoints.Count - 1;
-    }
 
     private void FixedUpdate()
     {

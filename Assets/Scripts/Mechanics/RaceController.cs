@@ -17,6 +17,9 @@ public enum RaceState
 public class RaceController : NetworkBehaviour {
     public GameObject prefDigit;
     public GameObject GUIPrefab;
+    private static GameObject prefRaceUI = Resources.Load<GameObject>("Prefabs/pref_RaceUI");
+
+
     public int Laps = 3;
 
     private Animator GUI;
@@ -24,9 +27,9 @@ public class RaceController : NetworkBehaviour {
     private Transform[] startPositions = new Transform[0];
 
     //private List<CarController> _cars = new List<CarController>();
-    private List<KeyValuePair<NetworkPlayer, CarUserControl>> _cars = new List<KeyValuePair<NetworkPlayer, CarUserControl>>();
+    private List<KeyValuePair<NetworkPlayer, Cockpit>> _cars = new List<KeyValuePair<NetworkPlayer, Cockpit>>();
 
-    private List<CarUserControl> _racingCars = new List<CarUserControl>();
+    private List<Cockpit> _racingCars = new List<Cockpit>();
     private List<NetworkPlayer> _topList = new List<NetworkPlayer>();
 
 
@@ -75,7 +78,7 @@ public class RaceController : NetworkBehaviour {
         }
     }
 
-    internal void RegisterCar(NetworkPlayer player, CarUserControl car)
+    internal void RegisterCar(NetworkPlayer player, Cockpit car)
     {
         if (State == RaceState.Preparing)
         {
@@ -84,7 +87,7 @@ public class RaceController : NetworkBehaviour {
                 car.SetState(false);
 
                 //_cars.Add(new KeyValuePair< car);
-                _cars.Add(new KeyValuePair<NetworkPlayer, CarUserControl>(player, car));
+                _cars.Add(new KeyValuePair<NetworkPlayer, Cockpit>(player, car));
                 _racingCars.Add(car);
 
                 if (Network.isServer)
@@ -94,7 +97,9 @@ public class RaceController : NetworkBehaviour {
                     //car.transform.rotation = startPositions[_cars.Count - 1].rotation;
                 }
 
-
+                if(!car.IsRemoteControlled) {
+                    MyCar = car;
+                }
             }
             else
             {
@@ -131,9 +136,10 @@ public class RaceController : NetworkBehaviour {
     private IEnumerator RaceCoroutine()
     {
 
-
         State = RaceState.Starting;
 
+        var raceUI = GameObject.Instantiate<GameObject>(prefRaceUI);
+       
         yield return StartCoroutine(DoCountdown());
 
         State = RaceState.Running;
@@ -156,22 +162,31 @@ public class RaceController : NetworkBehaviour {
                 if (!car)
                 {
                     // User was apparently deleted
-                    _cars.RemoveAt(i);
+                    _racingCars.RemoveAt(i);
                 }
                 else
                 {
-                    Debug.LogFormat("{0}: {1}", car.name, car.Laps);
                     if (car.Laps >= Laps)
                     {
-                        _cars.RemoveAt(i);
+                        _racingCars.RemoveAt(i);
                         _topList.Add(car.GetComponent<NetworkView>().owner);
                     }
                 }
-
             }
+
+            _racingCars.Sort( (lhs, rhs) => {
+                float p1 = lhs.Progress;
+                float p2 = rhs.Progress;
+
+                if (p1 < p2)
+                    return 1;
+                if (p1 == p2)
+                    return 0;
+                return -1;
+            });
+
             yield return null;
         }
-
     }
 
     private IEnumerator DoCountdown()
@@ -221,4 +236,6 @@ public class RaceController : NetworkBehaviour {
     {
 
     }
+
+    public Cockpit MyCar { get; private set; }
 }
