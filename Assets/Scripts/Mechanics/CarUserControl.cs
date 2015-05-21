@@ -3,6 +3,7 @@ using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 using System.Linq;
 using UnityStandardAssets.Vehicles.Car;
+using UnityStandardAssets.Utility;
 
 [RequireComponent(typeof(CarController))]
 public class CarUserControl : NetworkBehaviour
@@ -19,6 +20,10 @@ public class CarUserControl : NetworkBehaviour
     private Quaternion _syncRotStart = Quaternion.identity;
     private Quaternion _syncRotEnd = Quaternion.identity;
     private bool _blinking = false;
+    private WaypointContainer _circuit;
+    private Waypoint _currentWaypoint;
+    public int Laps { get; private set; }
+
 
     private void Awake()
     {
@@ -27,6 +32,8 @@ public class CarUserControl : NetworkBehaviour
         rigidbody = GetComponent<Rigidbody>();
         // get the car controller
         m_Car = GetComponent<CarController>();
+        _circuit = GameObject.FindGameObjectWithTag("Circuit").GetComponent<WaypointContainer>();
+        _currentWaypoint = _circuit.waypoints.First();
 
     }
 
@@ -50,11 +57,35 @@ public class CarUserControl : NetworkBehaviour
         GetComponentInChildren<SpurtEmitter>().enabled = active;
     }
 
+    private void OnTriggerEnter(Collider collider)
+    {
+        var waypoint = collider.GetComponent<Waypoint>();
+        if (waypoint)
+        {
+            if (IsNextWaypoint(waypoint))
+            {
+                _currentWaypoint = waypoint;
+                if (IsLast(waypoint)) Laps++;
+            }
+        }
+    }
+
+    private bool IsNextWaypoint(Waypoint waypoint)
+    {
+        return waypoint.id == _currentWaypoint.id + 1
+            || (IsLast(_currentWaypoint) && waypoint.id == 0);
+    }
+
+    private bool IsLast(Waypoint waypoint)
+    {
+        return _currentWaypoint.id == _circuit.waypoints.Count - 1;
+    }
 
     private void FixedUpdate()
     {
         if (!IsRemoteControlled)
         {
+
             // Disable mouse
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
@@ -84,6 +115,7 @@ public class CarUserControl : NetworkBehaviour
             }
         }
     }
+
     private void Respawn()
     {
         StartCoroutine(Blink());

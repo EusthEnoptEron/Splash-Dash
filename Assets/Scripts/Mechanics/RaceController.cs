@@ -17,12 +17,18 @@ public enum RaceState
 public class RaceController : NetworkBehaviour {
     public GameObject prefDigit;
     public GameObject GUIPrefab;
+    public int Laps = 3;
+
     private Animator GUI;
 
     private Transform[] startPositions = new Transform[0];
 
     //private List<CarController> _cars = new List<CarController>();
     private List<KeyValuePair<NetworkPlayer, CarUserControl>> _cars = new List<KeyValuePair<NetworkPlayer, CarUserControl>>();
+
+    private List<CarUserControl> _racingCars = new List<CarUserControl>();
+    private List<NetworkPlayer> _topList = new List<NetworkPlayer>();
+
 
     public RaceState State
     {
@@ -79,6 +85,7 @@ public class RaceController : NetworkBehaviour {
 
                 //_cars.Add(new KeyValuePair< car);
                 _cars.Add(new KeyValuePair<NetworkPlayer, CarUserControl>(player, car));
+                _racingCars.Add(car);
 
                 if (Network.isServer)
                 {
@@ -86,6 +93,7 @@ public class RaceController : NetworkBehaviour {
                     //car.transform.position = startPositions[_cars.Count - 1].position;
                     //car.transform.rotation = startPositions[_cars.Count - 1].rotation;
                 }
+
 
             }
             else
@@ -138,6 +146,32 @@ public class RaceController : NetworkBehaviour {
                 //car.Value.enabled = true;
             }
         }
+
+        // Racin' the shit out of this game
+        while (_racingCars.Count > 0)
+        {
+            for (int i = _racingCars.Count - 1; i >= 0; i--)
+            {
+                var car = _racingCars[i];
+                if (!car)
+                {
+                    // User was apparently deleted
+                    _cars.RemoveAt(i);
+                }
+                else
+                {
+                    Debug.LogFormat("{0}: {1}", car.name, car.Laps);
+                    if (car.Laps >= Laps)
+                    {
+                        _cars.RemoveAt(i);
+                        _topList.Add(car.GetComponent<NetworkView>().owner);
+                    }
+                }
+
+            }
+            yield return null;
+        }
+
     }
 
     private IEnumerator DoCountdown()
