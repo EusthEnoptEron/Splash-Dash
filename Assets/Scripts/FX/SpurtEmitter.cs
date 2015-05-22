@@ -330,7 +330,9 @@ public class SpurtEmitter : NetworkBehaviour
 
         mesh.RecalculateNormals();
         //mesh.RecalculateBounds();
-        meshFilter.mesh = mesh;
+
+        GameObject.Destroy(meshFilter.sharedMesh);
+        meshFilter.sharedMesh = mesh;
     }
 
     protected override void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)

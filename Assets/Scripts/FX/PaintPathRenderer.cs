@@ -13,11 +13,14 @@ public class PaintPathRenderer : MonoBehaviour {
     private Renderer renderer;
     private MeshFilter meshFilter;
 
+    private Mesh _mesh;
+
 	// Use this for initialization
 	void Awake () {
         renderer = GetComponent<Renderer>();
         meshFilter = GetComponent<MeshFilter>();
 
+        _mesh = new Mesh();
   
 	}
 
@@ -50,12 +53,11 @@ public class PaintPathRenderer : MonoBehaviour {
 
         renderer.material.mainTextureOffset += new Vector2(uvSpeed * Time.deltaTime, 0);
 
-        var mesh = new Mesh();
-        mesh.vertices = vertices.ToArray();
+        _mesh.vertices = vertices.ToArray();
         //mesh.SetIndices(vertices.Select((v, i) => i).ToArray(), MeshTopology.LineStrip, 0);
-        mesh.SetIndices(vertices.Take(vertices.Count-1).Select((v, i) => i).Where(i => i % 2 == 0).SelectMany(i => new int[]{i, i+1}).ToArray(), MeshTopology.Lines, 0);
+        _mesh.SetIndices(vertices.Take(vertices.Count-1).Select((v, i) => i).Where(i => i % 2 == 0).SelectMany(i => new int[]{i, i+1}).ToArray(), MeshTopology.Lines, 0);
 
-        meshFilter.mesh = mesh;
+        meshFilter.mesh = _mesh;
 	}
 
     void OnEnable()
