@@ -321,6 +321,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 474724}
   - 95: {fileID: 9520854}
+  - 114: {fileID: 11402130}
   m_Layer: 0
   m_Name: Car 1
   m_TagString: Untagged
@@ -2341,6 +2342,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11402130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f9c800da035744e8fdf97f58af6f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectController: {fileID: 11483446}
 --- !u!114 &11405688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2364,7 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a81decd090f9c409074f1bf7f663ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &11408760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2376,7 +2389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cc4660be900a04b8383579842dec90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 1, g: 1, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 0, a: 1}
 --- !u!114 &11409106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2429,7 +2442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad7b55576f3d6d745b8d12f7fb460b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 1, a: 0}
+  color: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &11419710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2494,7 +2507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c3a8fa1ce2218641b291e2e3affb944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 1, b: 0, a: 0}
+  color: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &11433280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2653,20 +2666,20 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 2
   m_WheelDampingRate: .25
   m_ForwardFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
+    m_ExtremumSlip: .400000006
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: .800000012
+    m_AsymptoteValue: .5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
-    m_Stiffness: 1
+    m_ExtremumSlip: .200000003
+    m_ExtremumValue: .5
+    m_AsymptoteSlip: .5
+    m_AsymptoteValue: .75
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!146 &14632392
 WheelCollider:
@@ -2682,20 +2695,20 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 2
   m_WheelDampingRate: .25
   m_ForwardFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
+    m_ExtremumSlip: .400000006
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: .800000012
+    m_AsymptoteValue: .5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
-    m_Stiffness: 1
+    m_ExtremumSlip: .200000003
+    m_ExtremumValue: .5
+    m_AsymptoteSlip: .5
+    m_AsymptoteValue: .75
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!146 &14654380
 WheelCollider:
@@ -2711,20 +2724,20 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 2
   m_WheelDampingRate: .25
   m_ForwardFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
+    m_ExtremumSlip: .400000006
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: .800000012
+    m_AsymptoteValue: .5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
-    m_Stiffness: 1
+    m_ExtremumSlip: .200000003
+    m_ExtremumValue: .5
+    m_AsymptoteSlip: .5
+    m_AsymptoteValue: .75
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!146 &14675700
 WheelCollider:
@@ -2740,20 +2753,20 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 20
+  m_Mass: 2
   m_WheelDampingRate: .25
   m_ForwardFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
+    m_ExtremumSlip: .400000006
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: .800000012
+    m_AsymptoteValue: .5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: .25
-    m_ExtremumValue: 2.5
-    m_AsymptoteSlip: .899999976
-    m_AsymptoteValue: 1
-    m_Stiffness: 1
+    m_ExtremumSlip: .200000003
+    m_ExtremumValue: .5
+    m_AsymptoteSlip: .5
+    m_AsymptoteValue: .75
+    m_Stiffness: 3
   m_Enabled: 1
 --- !u!148 &14824198
 NetworkView:

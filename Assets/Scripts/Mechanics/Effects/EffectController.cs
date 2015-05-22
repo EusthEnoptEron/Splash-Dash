@@ -7,6 +7,8 @@ public class EffectController : MonoBehaviour {
     private CarController _car;
     private Effect[] _effects;
 
+    public Effect ActiveEffect { get; private set; }
+
 	// Use this for initialization
 	void Awake () {
         _effects = GetComponentsInChildren<Effect>();
@@ -28,7 +30,7 @@ public class EffectController : MonoBehaviour {
         {
             var currentColor = _paintBrush.GetColor(transform.position);
 
-            Effect activeEffect = null;
+            ActiveEffect = null;
 
             // First, disable all effects that are inactive
             foreach (var effect in _effects)
@@ -36,12 +38,12 @@ public class EffectController : MonoBehaviour {
                 if (!CompareColor(currentColor, effect.color))
                     effect.enabled = false;
                 else
-                    activeEffect = effect;
+                    ActiveEffect = effect;
             }
 
             // Now, enable active effect
-            if (activeEffect != null)
-                activeEffect.enabled = true;
+            if (ActiveEffect != null)
+                ActiveEffect.enabled = true;
         }
         //else
         //{
@@ -51,6 +53,7 @@ public class EffectController : MonoBehaviour {
         //    }
         //}
 	}
+
 
     bool CompareColor(Color c1, Color c2)
     {
