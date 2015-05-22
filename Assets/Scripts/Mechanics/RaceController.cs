@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using UnityStandardAssets.Vehicles.Car;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 
 public enum RaceState
@@ -17,7 +19,7 @@ public enum RaceState
 public class RaceController : NetworkBehaviour {
     public GameObject prefDigit;
     public GameObject GUIPrefab;
-    private static GameObject prefRaceUI = Resources.Load<GameObject>("Prefabs/pref_RaceUI");
+    private GameObject prefRaceUI;
 
 
     public int Laps = 3;
@@ -30,7 +32,9 @@ public class RaceController : NetworkBehaviour {
     private List<KeyValuePair<NetworkPlayer, Cockpit>> _cars = new List<KeyValuePair<NetworkPlayer, Cockpit>>();
 
     private List<Cockpit> _racingCars = new List<Cockpit>();
-    private List<NetworkPlayer> _topList = new List<NetworkPlayer>();
+    private List<Cockpit> _topList = new List<Cockpit>();
+
+    private List<Cockpit> _positionTable = new List<Cockpit>();
 
 
     public RaceState State
@@ -47,6 +51,8 @@ public class RaceController : NetworkBehaviour {
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
+
+        prefRaceUI = Resources.Load<GameObject>("Prefabs/pref_RaceUI");
 
         networkView.stateSynchronization = NetworkStateSynchronization.Off;
 
@@ -69,6 +75,48 @@ public class RaceController : NetworkBehaviour {
 	void Update () {
 	
 	}
+
+    private void SyncPositionTable()
+    {
+        if (Network.isServer)
+        {
+
+            // Make table
+            
+            var newTable = _topList.Concat(_racingCars).ToList();
+            if(!newTable.SequenceEqual( _positionTable )) {
+                Debug.Log("SYNC SENT");
+
+                _positionTable = newTable;
+
+                // Sync with others
+                using(var stream = new MemoryStream()) {
+                    var formatter = new BinaryFormatter();
+                    formatter.Serialize(stream, _positionTable.Select(c => c.name).ToArray() );
+
+                    networkView.RPC("SyncPositionTableRPC", RPCMode.Others, stream.ToArray());
+                }
+            }
+            
+        }
+    }
+
+    [RPC]
+    private void SyncPositionTableRPC(byte[] serializedTable)
+    {
+        Debug.Log("SYNC RECEIVED");
+        var formatter = new BinaryFormatter();
+
+        using (var stream = new MemoryStream(serializedTable))
+        {
+            var list = formatter.Deserialize(stream) as string[];
+
+            _positionTable = list.Select(
+                cName => _cars.FirstOrDefault(playerCar => playerCar.Value.name == cName).Value   
+            ).ToList();
+        }
+    }
+
 
     public bool IsFull
     {
@@ -139,6 +187,7 @@ public class RaceController : NetworkBehaviour {
         State = RaceState.Starting;
 
         var raceUI = GameObject.Instantiate<GameObject>(prefRaceUI);
+        SyncPositionTable();
        
         yield return StartCoroutine(DoCountdown());
 
@@ -169,7 +218,7 @@ public class RaceController : NetworkBehaviour {
                     if (car.Laps >= Laps)
                     {
                         _racingCars.RemoveAt(i);
-                        _topList.Add(car.GetComponent<NetworkView>().owner);
+                        _topList.Add(car);
                     }
                 }
             }
@@ -184,6 +233,8 @@ public class RaceController : NetworkBehaviour {
                     return 0;
                 return -1;
             });
+
+            SyncPositionTable();
 
             yield return null;
         }
@@ -238,4 +289,9 @@ public class RaceController : NetworkBehaviour {
     }
 
     public Cockpit MyCar { get; private set; }
+
+    public int GetRank(Cockpit cockpit)
+    {
+        return _positionTable.IndexOf(cockpit) + 1;
+    }
 }

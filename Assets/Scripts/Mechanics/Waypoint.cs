@@ -8,7 +8,6 @@ using System;
 
 public class Waypoint : MonoBehaviour, IComparable
 {
-    public static ArrayList waypoints = new ArrayList();
 
     public int id;
 
@@ -21,65 +20,6 @@ public class Waypoint : MonoBehaviour, IComparable
     private bool m_initilised = false;
 
 
-    public static void reset()
-    {
-        waypoints = new ArrayList();
-    }
-
-    public static void InitAll()
-    {
-        Waypoint waypoint;
-
-        waypoints.Sort(); // sort based on id
-
-        for (int i = 0; i < waypoints.Count; i++)
-        {
-            waypoint = (Waypoint)waypoints[i];
-            waypoint.Init();
-        }
-
-    }
-
-    public void Awake()
-    {
-        m_initilised = false;
-
-        waypoints.Add(this);
-    }
-
-    public void Init()
-    {
-        targets = new ArrayList();
-
-        int nextWaypoint;
-        nextWaypoint = id + 1;
-
-        if (nextWaypoint > waypoints.Count - 1) nextWaypoint = 0;
-
-        m_target = (Waypoint)waypoints[nextWaypoint];
-
-        //Debug.Log("Waypoint Added");
-
-        float dx = m_target.transform.position.x - transform.position.x;
-        float dz = m_target.transform.position.z - transform.position.z;
-
-        m_angle = Mathf.Atan2(dz, dx) + Mathf.PI * 0.5f;
-
-        // Build Subwaypoints
-
-        dx = Mathf.Cos(m_angle);
-        dz = Mathf.Sin(m_angle);
-
-        for (int i = -m_steps; i < m_steps; i++)
-        {
-            Vector3 position = new Vector3(dx, 0f, dz) * i * m_stepWidth;
-            targets.Add(position + transform.position);
-        }
-
-        m_initilised = true;
-
-
-    }
 
     public int CompareTo(object obj)
     {
