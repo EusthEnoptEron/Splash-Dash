@@ -21,6 +21,6 @@ public class BucketView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        _fill.fillAmount = _bucket.fillLevel;
+        _fill.fillAmount = Mathf.Lerp(_fill.fillAmount, _bucket.fillLevel, Time.deltaTime * 5);
 	}
 }

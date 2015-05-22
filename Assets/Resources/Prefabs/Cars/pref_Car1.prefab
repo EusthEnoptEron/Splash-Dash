@@ -2422,6 +2422,7 @@ MonoBehaviour:
   maxRolloffDistance: 500
   dopplerLevel: 1
   useDoppler: 1
+  m_OutputGroup: {fileID: 24324326, guid: d9320f041a8052a4c803f5941aaa021f, type: 2}
 --- !u!114 &11419074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2587,8 +2588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
   fillLevel: 1
-  drainSpeed: .100000001
-  button: Fire1
+  drainSpeed: .200000003
+  button: Fire2
 --- !u!114 &11465252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2627,8 +2628,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 1, a: 1}
   fillLevel: 1
-  drainSpeed: .100000001
-  button: Fire2
+  drainSpeed: .300000012
+  button: Fire3
 --- !u!114 &11475958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2642,8 +2643,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 1, b: 0, a: 1}
   fillLevel: 1
-  drainSpeed: .100000001
-  button: Fire3
+  drainSpeed: .200000003
+  button: Fire1
 --- !u!114 &11483446
 MonoBehaviour:
   m_ObjectHideFlags: 1
