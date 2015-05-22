@@ -27,6 +27,7 @@ public class Cockpit : NetworkBehaviour
     public int Laps { get; private set; }
 
     private RaceController _race;
+    private PlayerLabelView _label;
 
     [RPC]
     public void SetName(string name)
@@ -36,6 +37,15 @@ public class Cockpit : NetworkBehaviour
         if (!IsRemoteControlled)
         {
             networkView.RPC("SetName", RPCMode.OthersBuffered, name);
+        }
+        else
+        {
+            if (_label == null)
+            {
+                _label = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/pref_PlayerLabel")).GetComponent<PlayerLabelView>();
+                _label.cockpit = this;
+            }
+            _label.UpdateName();
         }
     }
 
@@ -82,8 +92,10 @@ public class Cockpit : NetworkBehaviour
             var myDistance = transform.position - currentWaypoint.transform.position;
             float progress = Vector3.Dot(wpDistance.normalized, myDistance) / wpDistance.magnitude;
 
+            //Debug.LogFormat("Lap Progress: {0}, Checkpoint Progress: {1}, Checkpoint progress: {2}", offset,  ( (currentWaypoint.id + 1) % _circuit.waypoints.Count) / (float)_circuit.waypoints.Count,  progress);
+
             return Mathf.Clamp01(
-                (Laps + (_circuit.IsLast(currentWaypoint) ? 0 : currentWaypoint.id  + progress) / (float)_circuit.waypoints.Count) / _race.Laps 
+                (Laps + (((currentWaypoint.id + 1) % _circuit.waypoints.Count) + progress) / (float)_circuit.waypoints.Count) / _race.Laps 
             );
         }
     }
@@ -113,6 +125,7 @@ public class Cockpit : NetworkBehaviour
     {
         if (!IsRemoteControlled)
         {
+            //Debug.Log(Progress);
 
             // Disable mouse
             Cursor.lockState = CursorLockMode.Confined;
@@ -148,30 +161,34 @@ public class Cockpit : NetworkBehaviour
     {
         StartCoroutine(Blink());
 
-        var roadMeshes = GameObject.FindGameObjectsWithTag("Road").Select(road => road.GetComponent<MeshFilter>().sharedMesh);
-        var pos = transform.position;
+        //var roadMeshes = GameObject.FindGameObjectsWithTag("Road").Select(road => road.GetComponent<MeshFilter>().sharedMesh);
+        //var pos = transform.position;
 
-        float minDistance = float.MaxValue;
-        Vector3 minPos = pos;
-        Vector3 direction = transform.forward;
-        foreach (var mesh in roadMeshes)
-        {
-            var vertices = mesh.vertices;
+        //float minDistance = float.MaxValue;
+        //Vector3 minPos = pos;
+        //Vector3 direction = transform.forward;
+        //foreach (var mesh in roadMeshes)
+        //{
+        //    var vertices = mesh.vertices;
 
-            for (int i = 0; i < vertices.Length - 2; i++)
-            {
-                var dist = (vertices[i] - pos).sqrMagnitude;
-                if (dist < minDistance)
-                {
-                    minDistance = dist;
-                    minPos = (vertices[i] + vertices[i + 1]) / 2;
-                    direction = (vertices[i + 2] - vertices[i]).normalized;
-                }
-            }
-        }
+        //    for (int i = 0; i < vertices.Length - 2; i++)
+        //    {
+        //        var dist = (vertices[i] - pos).sqrMagnitude;
+        //        if (dist < minDistance)
+        //        {
+        //            minDistance = dist;
+        //            minPos = (vertices[i] + vertices[i + 1]) / 2;
+        //            direction = (vertices[i + 2] - vertices[i]).normalized;
+        //        }
+        //    }
+        //}
 
-        transform.position = minPos + Vector3.up;
-        transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(direction, Vector3.up), Vector3.up);
+        //transform.position = minPos + Vector3.up;
+        //transform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(direction, Vector3.up), Vector3.up);
+
+        rigidbody.MovePosition(currentWaypoint.transform.position);
+        rigidbody.MoveRotation(currentWaypoint.transform.rotation);
+
         rigidbody.velocity = Vector3.zero;
 
         foreach (var wheel in m_Car.Wheels)

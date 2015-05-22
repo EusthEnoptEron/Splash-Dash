@@ -18,7 +18,6 @@ public class LapView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
         lapNumber.text = Mathf.Clamp(_myCar.Laps+1, 1, _race.Laps).ToString();
         lapCount.text = _race.Laps.ToString();
 	}

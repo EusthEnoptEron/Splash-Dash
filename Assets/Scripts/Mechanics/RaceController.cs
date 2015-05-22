@@ -101,21 +101,6 @@ public class RaceController : NetworkBehaviour {
         }
     }
 
-    [RPC]
-    private void SyncPositionTableRPC(byte[] serializedTable)
-    {
-        Debug.Log("SYNC RECEIVED");
-        var formatter = new BinaryFormatter();
-
-        using (var stream = new MemoryStream(serializedTable))
-        {
-            var list = formatter.Deserialize(stream) as string[];
-
-            _positionTable = list.Select(
-                cName => _cars.FirstOrDefault(playerCar => playerCar.Value.name == cName).Value   
-            ).ToList();
-        }
-    }
 
 
     public bool IsFull
@@ -164,21 +149,6 @@ public class RaceController : NetworkBehaviour {
     public void UnregisterCar(NetworkPlayer player)
     {
 
-    }
-
-    [RPC]
-    public void StartRace()
-    {
-
-        if (State == RaceState.Preparing)
-        {
-            StartCoroutine(RaceCoroutine());
-        }
-
-        if (Network.isServer)
-        {
-            networkView.RPC("StartRace", RPCMode.Others);
-        }
     }
 
     private IEnumerator RaceCoroutine()
@@ -238,6 +208,8 @@ public class RaceController : NetworkBehaviour {
 
             yield return null;
         }
+
+        EndRace();
     }
 
     private IEnumerator DoCountdown()
@@ -294,4 +266,75 @@ public class RaceController : NetworkBehaviour {
     {
         return _positionTable.IndexOf(cockpit) + 1;
     }
+
+
+
+    #region RPC functions
+
+
+    [RPC]
+    private void SyncPositionTableRPC(byte[] serializedTable)
+    {
+        Debug.Log("SYNC RECEIVED");
+        var formatter = new BinaryFormatter();
+
+        using (var stream = new MemoryStream(serializedTable))
+        {
+            var list = formatter.Deserialize(stream) as string[];
+
+            _positionTable = list.Select(
+                cName => _cars.FirstOrDefault(playerCar => playerCar.Value.name == cName).Value
+            ).ToList();
+        }
+    }
+
+    [RPC]
+    public void StartRace()
+    {
+
+        if (State == RaceState.Preparing)
+        {
+            StartCoroutine(RaceCoroutine());
+        }
+
+        if (Network.isServer)
+        {
+            networkView.RPC("StartRace", RPCMode.Others);
+        }
+    }
+
+
+    [RPC]
+    public void EndRace()
+    {
+        State = RaceState.Ended;
+        foreach (var playerCar in _cars)
+        {
+            if (playerCar.Value)
+            {
+                playerCar.Value.enabled = false;
+            }
+        }
+
+        if (Network.isServer) networkView.RPC("EndRace", RPCMode.OthersBuffered);
+
+        var rankingEl = GameObject.Find("Ranking").transform;
+        var rankingItem = Resources.Load<GameObject>("Prefabs/pref_RankingEntry");
+           
+        // Show ranking
+        for (int i = 0; i < _positionTable.Count; i++)
+        {
+            int position = i + 1;
+            string name = _positionTable[i].name;
+
+            var item = GameObject.Instantiate<GameObject>(rankingItem);
+            item.transform.SetParent(rankingEl, false);
+
+            item.transform.FindChild("Position").GetComponent<Text>().text = position.ToSuffixedString();
+            item.transform.FindChild("Name").GetComponent<Text>().text = name;
+        }
+
+    }
+
+    #endregion
 }
