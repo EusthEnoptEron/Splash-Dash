@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#if UNITY_EDITOR
+
+using UnityEngine;
 using System.Collections;
 using System;
 using UnityEditor;
@@ -86,3 +88,5 @@ public class WaypointContainerEditor : Editor
 
 
 }
+
+#endif
