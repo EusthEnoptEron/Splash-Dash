@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 namespace UnityStandardAssets.Vehicles.Car
@@ -48,6 +49,8 @@ namespace UnityStandardAssets.Vehicles.Car
         private AudioSource m_HighDecel; // Source for the high deceleration sounds
         private bool m_StartedSound; // flag for knowing if we have started sounds
         private CarController m_CarController; // Reference to car we are controlling
+        [SerializeField]
+        private AudioMixerGroup m_OutputGroup;
 
 
         private void StartSound()
@@ -171,6 +174,7 @@ namespace UnityStandardAssets.Vehicles.Car
             source.minDistance = 5;
             source.maxDistance = maxRolloffDistance;
             source.dopplerLevel = 0;
+            source.outputAudioMixerGroup = m_OutputGroup;
             return source;
         }
 
