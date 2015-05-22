@@ -41,7 +41,7 @@
 			// Albedo comes from a texture tinted by color
 			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
 			o.Albedo = c.rgb;
-			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap)) * _BumpScale;
+			o.Normal = UnpackScaleNormal (tex2D (_BumpMap, IN.uv_BumpMap), _BumpScale);
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
@@ -53,6 +53,7 @@
 		//Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
 		Blend SrcAlpha OneMinusSrcAlpha
 		BlendOp Add
+		Name "SPLASH"
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
@@ -98,7 +99,7 @@
 			fixed4 c = tex2D (_MainTexPaint, IN.uv_MainTex) * color;
 			
 			o.Albedo = c.rgb;
-			o.Normal = UnpackNormal (tex2D (_BumpMap, IN.uv_BumpMap)) * _BumpScale;
+			o.Normal = UnpackScaleNormal (tex2D (_BumpMap, IN.uv_BumpMap), _BumpScale);
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _MetallicPaint;
 			o.Smoothness = _GlossinessPaint;
