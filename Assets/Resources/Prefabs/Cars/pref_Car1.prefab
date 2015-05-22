@@ -2406,8 +2406,11 @@ MonoBehaviour:
   sides: 50
   radius: .0399999991
   shootDelay: .100000001
+  shootSound: {fileID: 8300000, guid: 687409f111aa99045851a0e97042c75e, type: 3}
   radiusGrowthSpeed: 1
   gunMesh: {fileID: 437996}
+  outputAudioMixerGroup: {fileID: 24389646, guid: d9320f041a8052a4c803f5941aaa021f,
+    type: 2}
 --- !u!114 &11410250
 MonoBehaviour:
   m_ObjectHideFlags: 1

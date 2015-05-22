@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Audio;
 
 [RequireComponent(typeof(MeshRenderer), typeof(MeshFilter))]
 public class SpurtEmitter : NetworkBehaviour
@@ -62,6 +63,8 @@ public class SpurtEmitter : NetworkBehaviour
     public int sides = 8;
     public float radius = 0.1f;
     public float shootDelay = 0.4f;
+    public AudioClip shootSound;
+
 
     private float _shooting = 0;
 
@@ -71,7 +74,9 @@ public class SpurtEmitter : NetworkBehaviour
     private Quaternion gunStartOrientation;
 
     private Color shootingColor = Color.clear;
-    
+    public AudioMixerGroup outputAudioMixerGroup;
+
+
     private MeshRenderer renderer;
     private MeshFilter meshFilter;
     private new Rigidbody rigidbody;
@@ -83,12 +88,20 @@ public class SpurtEmitter : NetworkBehaviour
     private int uvCounter;
     private PaintTank[] tanks;
 
+    private AudioSource _audioSource;
+
+
     // Use this for initialization
     void Start()
     {
         renderer = GetComponent<MeshRenderer>();
         meshFilter = GetComponent<MeshFilter>();
         rigidbody = GetComponentInParent<Rigidbody>();
+        _audioSource = gameObject.AddComponent<AudioSource>();
+        _audioSource.loop = true;
+        _audioSource.playOnAwake = false;
+        _audioSource.outputAudioMixerGroup = outputAudioMixerGroup;
+        _audioSource.clip = shootSound;
 
         gunStartOrientation = gunMesh.rotation;
 
@@ -183,6 +196,8 @@ public class SpurtEmitter : NetworkBehaviour
 
         if ((!IsRemoteControlled && _shooting >= 0.5f) || (IsRemoteControlled && shootingColor != Color.clear))
         {
+            MakeSureIsPlaying(true);
+
             if (!IsRemoteControlled)
             {
                 int tankCount = minimalTanks.Count();
@@ -205,6 +220,8 @@ public class SpurtEmitter : NetworkBehaviour
         }
         else
         {
+            MakeSureIsPlaying(false);
+
             startTanks.Clear();
             positions.AddFirst((SpurtPosition)null);
             shootingColor = Color.clear;
@@ -213,6 +230,17 @@ public class SpurtEmitter : NetworkBehaviour
         //gunMesh.rotation = gunStartOrientation *  Quaternion.Inverse(gunStartOrientation) * transform.rotation;
         gunMesh.rotation = transform.rotation * Quaternion.Inverse(Quaternion.LookRotation(-Vector3.up, Vector3.forward));
         UpdateMesh();
+    }
+
+    private void MakeSureIsPlaying(bool isPlaying)
+    {
+        if (_audioSource.isPlaying != isPlaying)
+        {
+            if (isPlaying) _audioSource.Play();
+            else _audioSource.Stop();
+        }
+
+        _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, isPlaying ? 1 : 0, Time.deltaTime * 2); 
     }
 
     private void UpdateMesh()
