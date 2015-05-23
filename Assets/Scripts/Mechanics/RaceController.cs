@@ -101,8 +101,6 @@ public class RaceController : NetworkBehaviour {
         }
     }
 
-
-
     public bool IsFull
     {
         get

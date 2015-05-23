@@ -9,17 +9,34 @@ public class PositionView : MonoBehaviour {
     private Cockpit _myCar;
 
     public Text textEl;
+    private int displayedRank = -1;
+    private int toDisplayRank = -1;
+
 
 	// Use this for initialization
 	void Start () {
         _race = RaceController.Locate();
         _myCar = _race.MyCar;
+
+        UpdateRank();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        textEl.text = _race.GetRank(_myCar).ToSuffixedString();
+        int currentRank = _race.GetRank(_myCar);
+        if (toDisplayRank != currentRank)
+        {
+            toDisplayRank = currentRank;
+            CancelInvoke("UpdateRank");
+            Invoke("UpdateRank", 1);
+        }
 	}
+
+    void UpdateRank()
+    {
+        displayedRank =  toDisplayRank;
+        textEl.text = toDisplayRank.ToSuffixedString();
+    }
 
 }
 
