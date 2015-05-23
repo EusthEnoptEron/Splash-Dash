@@ -81,6 +81,7 @@ public class Cockpit : NetworkBehaviour
         enabled = active;
 
         GetComponentInChildren<SpurtEmitter>().enabled = active;
+        GetComponentInChildren<PaintPathRenderer>().enabled = active;
     }
 
     public float Progress

@@ -2670,7 +2670,7 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 2
+  m_Mass: 20
   m_WheelDampingRate: .25
   m_ForwardFriction:
     m_ExtremumSlip: .400000006
@@ -2683,7 +2683,7 @@ WheelCollider:
     m_ExtremumValue: .5
     m_AsymptoteSlip: .5
     m_AsymptoteValue: .75
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!146 &14632392
 WheelCollider:
@@ -2699,7 +2699,7 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 2
+  m_Mass: 20
   m_WheelDampingRate: .25
   m_ForwardFriction:
     m_ExtremumSlip: .400000006
@@ -2712,7 +2712,7 @@ WheelCollider:
     m_ExtremumValue: .5
     m_AsymptoteSlip: .5
     m_AsymptoteValue: .75
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!146 &14654380
 WheelCollider:
@@ -2728,7 +2728,7 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 2
+  m_Mass: 20
   m_WheelDampingRate: .25
   m_ForwardFriction:
     m_ExtremumSlip: .400000006
@@ -2741,7 +2741,7 @@ WheelCollider:
     m_ExtremumValue: .5
     m_AsymptoteSlip: .5
     m_AsymptoteValue: .75
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!146 &14675700
 WheelCollider:
@@ -2757,7 +2757,7 @@ WheelCollider:
     targetPosition: 0
   m_SuspensionDistance: .300000012
   m_ForceAppPointDistance: 0
-  m_Mass: 2
+  m_Mass: 20
   m_WheelDampingRate: .25
   m_ForwardFriction:
     m_ExtremumSlip: .400000006
@@ -2770,7 +2770,7 @@ WheelCollider:
     m_ExtremumValue: .5
     m_AsymptoteSlip: .5
     m_AsymptoteValue: .75
-    m_Stiffness: 3
+    m_Stiffness: 5
   m_Enabled: 1
 --- !u!148 &14824198
 NetworkView:
