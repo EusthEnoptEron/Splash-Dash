@@ -44,4 +44,13 @@ public class PrefabSpawner : MonoBehaviour {
 
         Spawn();
     }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = prefab.GetComponent<RefillPickup>() != null
+                    ? prefab.GetComponent<RefillPickup>().color
+                    : Color.white;
+        Gizmos.DrawSphere(transform.position, 1f);
+
+    }
 }

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class RefillPickup : Pickup {
     public Color color;
-    public Material material;
 
     public float amount = 0.5f;
     public float anglePerSecond = 60f;
@@ -11,8 +11,13 @@ public class RefillPickup : Pickup {
 
     public void Start()
     {
-        if (material)
-            material.color = color;
+        foreach (var mat in GetComponentsInChildren<MeshRenderer>().SelectMany(r => r.materials))
+        {
+            if (mat.shader.name.Contains("Vertex"))
+            {
+                mat.color = color;
+            }
+        }
     }
 
     public void Update()
