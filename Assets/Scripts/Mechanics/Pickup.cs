@@ -38,12 +38,6 @@ public abstract class Pickup : NetworkBehaviour {
 
     private void Destroy()
     {
-        networkView.RPC("DestroyRPC",  RPCMode.All);
-    }
-
-    [RPC]
-    private void DestroyRPC()
-    {
         if (pickupSound)
         {
             PlayOneShot(pickupSound);

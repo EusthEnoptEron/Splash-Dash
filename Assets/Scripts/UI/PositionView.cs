@@ -9,8 +9,8 @@ public class PositionView : MonoBehaviour {
     private Cockpit _myCar;
 
     public Text textEl;
-    private int displayedRank = -1;
-    private int toDisplayRank = -1;
+    private int displayedRank = 0;
+    private int toDisplayRank = 0;
 
 
 	// Use this for initialization
@@ -27,8 +27,12 @@ public class PositionView : MonoBehaviour {
         if (toDisplayRank != currentRank)
         {
             toDisplayRank = currentRank;
-            CancelInvoke("UpdateRank");
-            Invoke("UpdateRank", 1);
+            if (displayedRank <= 0) UpdateRank();
+            else
+            {
+                CancelInvoke("UpdateRank");
+                Invoke("UpdateRank", 0.2f);
+            }
         }
 	}
 
