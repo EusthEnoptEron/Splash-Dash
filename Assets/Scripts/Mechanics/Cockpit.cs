@@ -121,17 +121,41 @@ public class Cockpit : NetworkBehaviour
         return waypoint.id == nextWaypoint.id;
     }
 
+    private bool _focused = true;
+    private void OnApplicationFocus(bool focus)
+    {
+        _focused = focus;
+
+        if (enabled)
+        {
+            if (_focused) OnEnable();
+            else OnDisable();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (!IsRemoteControlled)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (!IsRemoteControlled)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
 
     private void FixedUpdate()
     {
         if (!IsRemoteControlled)
         {
             //Debug.Log(Progress);
-
-            // Disable mouse
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
-            
 
             // pass the input to the car!
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
