@@ -147,10 +147,19 @@ public class Cockpit : NetworkBehaviour
         }
     }
 
+    public bool isOnRoad = true;
+
     public void Update()
     {
         if (!IsRemoteControlled)
         {
+
+            WheelHit hit;
+            if (m_Car.Wheels.First().GetGroundHit(out hit))
+            {
+                isOnRoad = hit.collider.CompareTag("Road");
+            }
+
             if (Input.GetButtonDown("Respawn"))
             {
                 Respawn();
@@ -158,7 +167,7 @@ public class Cockpit : NetworkBehaviour
         }
     }
 
-    private void Respawn()
+    public void Respawn()
     {
         StartCoroutine(Blink());
 
