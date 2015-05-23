@@ -102,6 +102,8 @@ public class SpurtEmitter : NetworkBehaviour
         _audioSource.playOnAwake = false;
         _audioSource.outputAudioMixerGroup = outputAudioMixerGroup;
         _audioSource.clip = shootSound;
+        _audioSource.spatialBlend = 1;
+        _audioSource.minDistance = 5;
 
         gunStartOrientation = gunMesh.rotation;
 

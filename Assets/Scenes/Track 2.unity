@@ -343,8 +343,8 @@ AudioSource:
   Loop: 1
   Mute: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
+  DopplerLevel: 1.33000004
+  MinDistance: 1.96000004
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -380,7 +380,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 0
+      value: .13333334
       inSlope: 0
       outSlope: 0
       tangentMode: 0

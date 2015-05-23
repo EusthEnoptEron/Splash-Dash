@@ -175,6 +175,8 @@ namespace UnityStandardAssets.Vehicles.Car
             source.maxDistance = maxRolloffDistance;
             source.dopplerLevel = 0;
             source.outputAudioMixerGroup = m_OutputGroup;
+            source.spatialBlend = 1;
+            source.minDistance = 5;
             return source;
         }
 
