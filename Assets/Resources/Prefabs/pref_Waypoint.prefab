@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 401462}
   - 114: {fileID: 11466450}
   - 65: {fileID: 6541466}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: pref_Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

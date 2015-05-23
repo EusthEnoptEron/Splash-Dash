@@ -187,7 +187,7 @@ GameObject:
   - 4: {fileID: 20576479}
   - 114: {fileID: 20576478}
   - 65: {fileID: 20576477}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - 4: {fileID: 47112519}
   - 114: {fileID: 47112521}
   - 65: {fileID: 47112520}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   - 4: {fileID: 438307041}
   - 114: {fileID: 438307043}
   - 65: {fileID: 438307042}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   - 4: {fileID: 468343274}
   - 114: {fileID: 468343276}
   - 65: {fileID: 468343275}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -671,7 +671,7 @@ GameObject:
   - 4: {fileID: 683477610}
   - 114: {fileID: 683477612}
   - 65: {fileID: 683477611}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   - 4: {fileID: 757728821}
   - 114: {fileID: 757728823}
   - 65: {fileID: 757728822}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -819,7 +819,7 @@ GameObject:
   - 4: {fileID: 851472535}
   - 114: {fileID: 851472537}
   - 65: {fileID: 851472536}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +872,7 @@ GameObject:
   - 4: {fileID: 859530104}
   - 114: {fileID: 859530106}
   - 65: {fileID: 859530105}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1015,7 +1015,7 @@ MonoBehaviour:
   distance: 10
   height: 4
   heightDamping: 2
-  rotationDamping: 1
+  rotationDamping: 2
 --- !u!1 &1070397698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1122,7 +1122,7 @@ GameObject:
   - 4: {fileID: 1432075601}
   - 114: {fileID: 1432075603}
   - 65: {fileID: 1432075602}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1457,7 +1457,7 @@ GameObject:
   - 4: {fileID: 1939194159}
   - 114: {fileID: 1939194161}
   - 65: {fileID: 1939194160}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1552,7 +1552,7 @@ GameObject:
   - 4: {fileID: 2074890807}
   - 114: {fileID: 2074890809}
   - 65: {fileID: 2074890808}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
