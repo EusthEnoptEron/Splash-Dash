@@ -87,5 +87,5 @@ Shader "Custom/Toon Lit Outline Splash" {
 
 	} 
 	
-	Fallback "Toon/Lit 2"
+	Fallback "Toon/Lit"
 }
