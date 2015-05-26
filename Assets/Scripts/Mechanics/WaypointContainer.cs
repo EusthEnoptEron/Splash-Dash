@@ -20,6 +20,7 @@ public class WaypointContainer : MonoBehaviour
               : waypoints[waypoint.id + 1];
     }
 
+
     public bool IsLast(Waypoint waypoint)
     {
         return waypoint.id == waypoints.Count - 1;
