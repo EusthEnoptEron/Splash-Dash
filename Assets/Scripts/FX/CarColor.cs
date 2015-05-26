@@ -10,7 +10,7 @@ public class CarColor : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        _materials = GetComponentsInChildren<MeshRenderer>().SelectMany(r => r.materials).ToArray();
+        _materials = GetComponentsInChildren<MeshRenderer>().SelectMany(r => r.materials).Where(mat => !mat.name.Contains("NoColor")).ToArray();
         _car = GetComponentInParent<CarController>();
 	}
 	

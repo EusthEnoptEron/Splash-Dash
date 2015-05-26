@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 8
---- !u!1 &94426819 stripped
+--- !u!1 &94426819
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 2079533595}
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   height: 4
   heightDamping: 2
   rotationDamping: 2
---- !u!4 &926796055 stripped
+--- !u!4 &926796055
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 2079533595}
@@ -1362,7 +1362,7 @@ Transform:
   - {fileID: 1577310986}
   m_Father: {fileID: 1501978572}
   m_RootOrder: 1
---- !u!1 &1300359821 stripped
+--- !u!1 &1300359821
 GameObject:
   m_PrefabParentObject: {fileID: 100010, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 2079533595}
