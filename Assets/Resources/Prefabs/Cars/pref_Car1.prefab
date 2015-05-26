@@ -63,6 +63,7 @@ GameObject:
   - 114: {fileID: 11419074}
   - 114: {fileID: 11408760}
   - 114: {fileID: 11405688}
+  - 114: {fileID: 11425910}
   m_Layer: 0
   m_Name: Effects
   m_TagString: Untagged
@@ -2488,6 +2489,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkidTrailPrefab: {fileID: 400000, guid: 4b6aa99de5d21424eab6ae279f31475b, type: 2}
   skidParticles: {fileID: 0}
+--- !u!114 &11425910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101712}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb9d40d40d891c48aff60b1c3867b99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &11428250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2548,6 +2561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd0fa024b445b5428a66d7c7030b4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isOnRoad: 1
 --- !u!114 &11453442
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -162,7 +162,7 @@ public class Cockpit : NetworkBehaviour
             float v = CrossPlatformInputManager.GetAxis("Vertical");
 #if !MOBILE_INPUT
             float handbrake = CrossPlatformInputManager.GetAxis("Jump");
-            m_Car.Move(h, v, v, handbrake);
+            m_Car.Move(Inverted ? -h : h, v, v, handbrake);
 #else
             m_Car.Move(h, v, v, 0f);
 #endif
@@ -304,4 +304,6 @@ public class Cockpit : NetworkBehaviour
 
 
 
+
+    public bool Inverted { get; set; }
 }
