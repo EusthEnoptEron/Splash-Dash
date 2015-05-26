@@ -5,10 +5,13 @@ using UnityEngine.Audio;
 public abstract class Pickup : NetworkBehaviour {
     public AudioClip pickupSound;
     public AudioMixerGroup outputAudioMixerGroup;
+    private bool _pickedUp = false;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInParent<NetworkView>().isMine)
+        if (_pickedUp)
+            return;
+        if (!other.GetComponentInParent<Cockpit>().IsRemoteControlled)
         {
             var trunk = other.GetComponentInParent<CarTrunk>();
             if (trunk != null)
@@ -16,6 +19,7 @@ public abstract class Pickup : NetworkBehaviour {
                 // PICKUP!
                 if (PickUp(trunk))
                 {
+                    _pickedUp = true;
                     Destroy();
                 }
             }

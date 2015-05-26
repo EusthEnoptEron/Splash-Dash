@@ -39,7 +39,7 @@ public class SpurtEmitter : NetworkBehaviour
 
                 Ray ray = new Ray(prevPos, diff.normalized);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, diff.magnitude, LayerMask.GetMask("Colorable")))
+                if (Physics.Raycast(ray, out hit, diff.magnitude, LayerMask.GetMask("Colorable", "Floor")))
                 {
                     Position = hit.point;
                     Velocity = -hit.normal;

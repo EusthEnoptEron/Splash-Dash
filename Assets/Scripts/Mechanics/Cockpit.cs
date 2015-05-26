@@ -114,8 +114,18 @@ public class Cockpit : NetworkBehaviour
                 if (_circuit.IsLast(waypoint)) Laps++;
             }
         }
+        else if(collider.CompareTag("Road"))
+        {
+            hasRoadContact = true;
+        }
     }
-
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Road"))
+        {
+            hasRoadContact = false;
+        }
+    }
     private bool IsNextWaypoint(Waypoint waypoint)
     {
         return waypoint.id == nextWaypoint.id;
@@ -132,6 +142,7 @@ public class Cockpit : NetworkBehaviour
             else OnDisable();
         }
     }
+
 
     private void OnEnable()
     {
@@ -172,17 +183,19 @@ public class Cockpit : NetworkBehaviour
     }
 
     public bool isOnRoad = true;
-
+    private bool hasRoadContact = true;
     public void Update()
     {
         if (!IsRemoteControlled)
         {
+            if (m_Car.Wheels.Any(wheel => wheel.isGrounded))
+                isOnRoad = hasRoadContact;
 
-            WheelHit hit;
-            if (m_Car.Wheels.First().GetGroundHit(out hit))
-            {
-                isOnRoad = hit.collider.CompareTag("Road");
-            }
+            //WheelHit hit;
+            //if (m_Car.Wheels.First().GetGroundHit(out hit))
+            //{
+            //    isOnRoad = hit.collider.CompareTag("Road");
+            //}
 
             if (Input.GetButtonDown("Respawn"))
             {

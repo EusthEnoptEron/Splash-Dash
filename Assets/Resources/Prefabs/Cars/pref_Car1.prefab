@@ -350,6 +350,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &144268
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 462040}
+  - 65: {fileID: 6579380}
+  m_Layer: 0
+  m_Name: RoadTester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &146334
 GameObject:
   m_ObjectHideFlags: 1
@@ -756,8 +772,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 132014}
-  m_LocalRotation: {x: 0, y: -.999164045, z: 0, w: .0408813283}
-  m_LocalPosition: {x: 72.7300034, y: 22, z: 11}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 498796}
@@ -816,6 +832,7 @@ Transform:
   m_Children:
   - {fileID: 474352}
   - {fileID: 401596}
+  - {fileID: 462040}
   m_Father: {fileID: 402726}
   m_RootOrder: 2
 --- !u!4 &412210
@@ -1002,6 +1019,18 @@ Transform:
   - {fileID: 496364}
   m_Father: {fileID: 498872}
   m_RootOrder: 20
+--- !u!4 &462040
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .273000002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 408920}
+  m_RootOrder: 2
 --- !u!4 &467516
 Transform:
   m_ObjectHideFlags: 1
@@ -2046,6 +2075,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.01564431, y: .439354777, z: 2.10865235}
   m_Center: {x: -.00811675377, y: .395799637, z: -.0584317334}
+--- !u!65 &6579380
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.9708308, z: 2.07673955}
+  m_Center: {x: 0, y: .0759012103, z: -.0194166899}
 --- !u!82 &8204010
 AudioSource:
   m_ObjectHideFlags: 1
