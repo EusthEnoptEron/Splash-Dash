@@ -151,6 +151,12 @@ public class RaceController : NetworkBehaviour {
 
     private IEnumerator RaceCoroutine()
     {
+        // change to car!
+        Camera.main.GetComponent<FreeCamera>().enabled = false;
+        Camera.main.GetComponent<SmoothFollow>().enabled = true;
+        Camera.main.GetComponent<SmoothFollow>().target = MyCar.transform;
+
+
 
         State = RaceState.Starting;
 

@@ -293,7 +293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 8
---- !u!1 &94426819
+--- !u!1 &94426819 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100006, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 2079533595}
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 892235273}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1ce326c09ebbdd44b72f71f586b901b, type: 3}
   m_Name: 
@@ -1201,15 +1201,16 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 892235273}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71ffcabcb43c5a54d978701e5e555c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: .100000001
-  offset: {x: 0, y: 3, z: 0}
+  duration: 50
+  offset: {x: 0, y: 30, z: 0}
   baseRotation: {x: 30, y: 0, z: 0}
---- !u!4 &926796055
+  smoothIterations: 5
+--- !u!4 &926796055 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400004, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 2079533595}
@@ -1377,7 +1378,7 @@ Transform:
   - {fileID: 1577310986}
   m_Father: {fileID: 1501978572}
   m_RootOrder: 1
---- !u!1 &1300359821
+--- !u!1 &1300359821 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100010, guid: edb1b96d2d4a78149998684517a13306, type: 3}
   m_PrefabInternal: {fileID: 2079533595}
