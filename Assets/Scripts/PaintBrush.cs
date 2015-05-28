@@ -71,7 +71,7 @@ public class PaintBrush : NetworkBehaviour {
         computeShader.SetVector("Color", color);
         computeShader.SetVector("Offset", new Vector2(left, top));
         computeShader.SetFloat("Radius", radius);
-        computeShader.Dispatch(0, width / 5, width / 5, 1);
+        computeShader.Dispatch(0, Mathf.CeilToInt(width / 5f), Mathf.CeilToInt(width / 5f), 1);
 
         var vRadius = new Vector2(radius, radius);
         for (int y = 0; y < width; y++)
@@ -86,6 +86,7 @@ public class PaintBrush : NetworkBehaviour {
                     int rx = left + x;
                     if (rx >= 0 && rx < colorMat.GetLength(0))
                     {
+                        // Only draw within a circle. Same calculation as in the compute shader.
                         if ((position - vRadius).magnitude <= radius)
                         {
                             colorMat[rx, ry] = color;
@@ -95,8 +96,11 @@ public class PaintBrush : NetworkBehaviour {
             }
         }
 
-        if(forward && NetworkController.IsConnected)
+        if (forward && NetworkController.IsConnected)
+        {
             networkView.RPC("PaintRPC", RPCMode.OthersBuffered, worldPos, color.r, color.g, color.b, color.a, width);
+        }
+
     }
 
     [RPC]
