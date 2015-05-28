@@ -8,6 +8,13 @@ public class NetworkController : MonoBehaviour {
     private HostData[] hostList;
     private RaceController race;
 
+    public int initialSplashes = 500;
+    public Vector2 initialSplashSize = new Vector2(1f, 20f);
+    public Color[] initialSplashColors = new Color[] {
+        Color.green,
+        Color.red,
+        Color.blue
+    };
 
     public GameObject carPrefab;
     public GameObject paintbrushPrefab;
@@ -80,6 +87,21 @@ public class NetworkController : MonoBehaviour {
 
         SpawnPlayer();
 
+        var brush = paintbrush.GetComponent<PaintBrush>();
+
+        var mapSize = Ruler.Measure();
+
+        for (int i = 0; i < initialSplashes; i++)
+        {
+            brush.Paint(
+                Random.insideUnitSphere * mapSize.x / 2,
+                initialSplashColors[Random.Range(0, initialSplashColors.Length)], 
+                Random.Range(
+                    (int)(initialSplashSize.x * PaintBrush.SCALE_FACTOR), 
+                    (int)(initialSplashSize.y * PaintBrush.SCALE_FACTOR)
+                )
+            );
+        }
     }
 
     private void SpawnPlayer()

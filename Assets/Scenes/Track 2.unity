@@ -379,6 +379,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619d9e5dea0a9464abda12f6d35521af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialSplashes: 500
+  initialSplashSize: {x: 1, y: 20}
+  initialSplashColors:
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0, g: 1, b: 1, a: 1}
   carPrefab: {fileID: 132014, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
   paintbrushPrefab: {fileID: 140618, guid: cc9f0f3ca0082c64bac008d333ef49ab, type: 2}
 --- !u!4 &191879755

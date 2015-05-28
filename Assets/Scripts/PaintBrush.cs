@@ -17,7 +17,7 @@ public class PaintBrush : NetworkBehaviour {
 
     private RenderTexture rPaintTexture;
     private int counter = 0;
-    public const float SCALE_FACTOR = 1;
+    public static float SCALE_FACTOR = 1;
 
 
     public static PaintBrush Locate()
@@ -29,24 +29,27 @@ public class PaintBrush : NetworkBehaviour {
         }
         return paintbrushObj.GetComponent<PaintBrush>();
     }
+
+
     protected override void Awake()
     {
         base.Awake();
         networkView.stateSynchronization = NetworkStateSynchronization.Off;
-    }
 
-	// Use this for initialization
-    void Start () {
-       
         rPaintTexture = new RenderTexture(4096, 4096, 8);
         rPaintTexture.enableRandomWrite = true;
         rPaintTexture.Create();
         computeShader.SetTexture(0, "Result", rPaintTexture);
 
+        var mapSize = Ruler.Measure();
+        float maxLength = Mathf.Max(mapSize.x, mapSize.y);
+        //SCALE_FACTOR = 4096 / maxLength;
+
+        Debug.Log("Scale factor: " + SCALE_FACTOR);
         Shader.SetGlobalTexture("_PaintTexture", rPaintTexture);
         Shader.SetGlobalFloat("_PaintScale", SCALE_FACTOR);
-	}
-    
+    }
+
     void OnApplicationQuit()
     {
         Shader.SetGlobalFloat("_PaintScale", 0);
@@ -64,11 +67,13 @@ public class PaintBrush : NetworkBehaviour {
         //paintTexture.SetPixels(left, top, Mathf.RoundToInt(width / 2f), Mathf.RoundToInt(width / 2f), Enumerable.Repeat(color, width * width).ToArray() );
 
         //dirty = true;
+        float radius = width / 2f;
         computeShader.SetVector("Color", color);
         computeShader.SetVector("Offset", new Vector2(left, top));
-        computeShader.SetFloat("Radius", width / 2);
+        computeShader.SetFloat("Radius", radius);
         computeShader.Dispatch(0, width / 5, width / 5, 1);
 
+        var vRadius = new Vector2(radius, radius);
         for (int y = 0; y < width; y++)
         {
             int ry = top + y;
@@ -76,10 +81,15 @@ public class PaintBrush : NetworkBehaviour {
             {
                 for (int x = 0; x < width; x++)
                 {
+                    var position = new Vector2(x, y);
+
                     int rx = left + x;
                     if (rx >= 0 && rx < colorMat.GetLength(0))
                     {
-                        colorMat[rx, ry] = color;
+                        if ((position - vRadius).magnitude <= radius)
+                        {
+                            colorMat[rx, ry] = color;
+                        }
                     }
                 }
             }

@@ -130,7 +130,7 @@ public class SpurtEmitter : NetworkBehaviour
                 {
                     if (!position.Value.IsPainted && !IsRemoteControlled)
                     {
-                        paintBrush.Paint(position.Value.Position, position.Value.Color, (int)(position.Value.Radius * 2 * PaintBrush.SCALE_FACTOR ));
+                        paintBrush.Paint(position.Value.Position, position.Value.Color, (int)(position.Value.Radius * 4 * PaintBrush.SCALE_FACTOR ));
 
                         if (position.Previous != null && position.Previous.Value != null && position.Previous.Value.IsDead)
                             PaintToPosition(position.Value, position.Previous.Value);
