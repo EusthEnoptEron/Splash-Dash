@@ -215,10 +215,20 @@ public class SpurtEmitter : NetworkBehaviour
             }
             startTanks = minimalTanks.ToList();
 
-            positions.AddFirst(new SpurtPosition(transform.position, Inertia + transform.forward * startVelocity, prevRadius, shootingColor/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
+            if (Input.GetButton("Reverse") && !IsRemoteControlled)
             {
-                V = (uvCounter++ % count - 1f) / count
-            });
+                // We gotta release our load backward!
+                paintBrush.Paint(transform.position - transform.forward * 1.5f, shootingColor, (int)(2 * PaintBrush.SCALE_FACTOR));
+                positions.AddFirst((SpurtPosition)null);
+                
+            }
+            else
+            {
+                positions.AddFirst(new SpurtPosition(transform.position, Inertia + transform.forward * startVelocity, prevRadius, shootingColor/* new HSBColor(Time.time % 1, 1, 1).ToColor()*/ )
+                {
+                    V = (uvCounter++ % count - 1f) / count
+                });
+            }
         }
         else
         {
