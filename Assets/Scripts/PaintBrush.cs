@@ -19,7 +19,7 @@ public class PaintBrush : NetworkBehaviour {
     private int counter = 0;
 
     [SerializeField]
-    private bool _adaptiveScale = false;
+    private bool _adaptiveScale = true;
 
     public static float SCALE_FACTOR = 1;
 

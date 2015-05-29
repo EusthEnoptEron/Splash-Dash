@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   computeShader: {fileID: 7200000, guid: 92b45cefbc56cb94abd529b872ec4509, type: 3}
-  _adaptiveScale: 0
+  _adaptiveScale: 1
 --- !u!148 &14806254
 NetworkView:
   m_ObjectHideFlags: 1
