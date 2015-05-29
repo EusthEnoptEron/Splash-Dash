@@ -34,9 +34,9 @@ public class WheelPaint : MonoBehaviour {
             var color = paintBrush.GetColor(transform.position);
             if (color.a == 1)
             {
-                color.r += 0.5f;
-                color.g += 0.5f;
-                color.b += 0.5f;
+                //color.r += 0.5f;
+                //color.g += 0.5f;
+                //color.b += 0.5f;
 
                 particleSystem.startColor = color;
                 particleSystem.enableEmission = true;

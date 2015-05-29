@@ -7,6 +7,8 @@
 		_BumpMap ("Bumpmap", 2D) = "bump" {}
 		_BumpScale("Scale", Float) = 1.0
 
+		_OutlineColor ("Outline Color", Color) = (0,0,0,1)
+		_Outline ("Outline width", Range (.002, 0.03)) = .005
 		_MainTexPaint ("Albedo (Paint, RGB)", 2D) = "white" {}
 
 	}
@@ -47,6 +49,8 @@
 		}
 		ENDCG
 		
+
+		UsePass "Toon/Basic Outline/OUTLINE"
 
 		//Tags { "RenderType" = "Transparent" "Queue" = "Transparent" }
 		Blend SrcAlpha OneMinusSrcAlpha

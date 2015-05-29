@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Material
-  m_Shader: {fileID: 4800000, guid: fcf0fa60726b1cc45b99f53cd4cbd9ed, type: 3}
+  m_Shader: {fileID: 4800000, guid: 95387352882da08428232d22b83e4e6c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -26,11 +26,25 @@ Material:
           name: _BumpMap
         second:
           m_Texture: {fileID: 2800000, guid: 81af53d41d11eff4ebbe2b121447cca2, type: 3}
-          m_Scale: {x: 100, y: 100}
+          m_Scale: {x: 1000, y: 1000}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DetailNormalMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Ramp
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ToonShade
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -84,20 +98,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ToonShade
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Ramp
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -113,8 +113,12 @@ Material:
         second: 0
       data:
         first:
+          name: _Outline
+        second: .0083999997
+      data:
+        first:
           name: _Glossiness
-        second: .129999995
+        second: 0
       data:
         first:
           name: _Metallic
@@ -159,10 +163,6 @@ Material:
         first:
           name: _MetallicPaint
         second: .75
-      data:
-        first:
-          name: _Outline
-        second: .0083999997
     m_Colors:
       data:
         first:
@@ -174,9 +174,9 @@ Material:
         second: {r: .602941155, g: .602941155, b: .602941155, a: 1}
       data:
         first:
-          name: _EmissionColorUI
-        second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
           name: _OutlineColor
         second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _EmissionColorUI
+        second: {r: 1, g: 1, b: 1, a: 1}
