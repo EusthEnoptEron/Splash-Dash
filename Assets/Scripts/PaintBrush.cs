@@ -17,6 +17,10 @@ public class PaintBrush : NetworkBehaviour {
 
     private RenderTexture rPaintTexture;
     private int counter = 0;
+
+    [SerializeField]
+    private bool _adaptiveScale = false;
+
     public static float SCALE_FACTOR = 1;
 
 
@@ -43,7 +47,9 @@ public class PaintBrush : NetworkBehaviour {
 
         var mapSize = Ruler.Measure();
         float maxLength = Mathf.Max(mapSize.x, mapSize.y);
-        //SCALE_FACTOR = 4096 / maxLength;
+        
+        if(_adaptiveScale)
+            SCALE_FACTOR = 4096 / maxLength;
 
         Debug.Log("Scale factor: " + SCALE_FACTOR);
         Shader.SetGlobalTexture("_PaintTexture", rPaintTexture);

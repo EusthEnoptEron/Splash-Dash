@@ -44,6 +44,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefDigit: {fileID: 176294, guid: 2886d165748c2ed4292e1c7ae7454298, type: 2}
   GUIPrefab: {fileID: 160736, guid: 15a56dca62abe45458bc2f0caea39a57, type: 2}
+  Laps: 3
 --- !u!114 &11422846
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -56,6 +57,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   computeShader: {fileID: 7200000, guid: 92b45cefbc56cb94abd529b872ec4509, type: 3}
+  _adaptiveScale: 0
 --- !u!148 &14806254
 NetworkView:
   m_ObjectHideFlags: 1
