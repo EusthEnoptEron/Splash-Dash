@@ -54,6 +54,8 @@ public class PaintBrush : NetworkBehaviour {
         Debug.Log("Scale factor: " + SCALE_FACTOR);
         Shader.SetGlobalTexture("_PaintTexture", rPaintTexture);
         Shader.SetGlobalFloat("_PaintScale", SCALE_FACTOR);
+        Shader.SetGlobalFloat("_GlossinessPaint", 0.7f);
+        Shader.SetGlobalFloat("_MetallicPaint", 0.7f);
     }
 
     void OnApplicationQuit()

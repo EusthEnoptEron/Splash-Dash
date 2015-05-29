@@ -9,8 +9,6 @@ Shader "Custom/Toon Lit Outline Splash" {
 		_BumpMap ("Bumpmap", 2D) = "bump" {}
 		_BumpScale("Scale", Float) = 1.0
 		_MainTexPaint ("Albedo (Paint, RGB)", 2D) = "white" {}
-		_GlossinessPaint ("Smoothness (Paint)", Range(0,1)) = 0.5
-		_MetallicPaint ("Metallic (Paint)", Range(0,1)) = 0.0
 	}
 
 	SubShader {
@@ -39,8 +37,8 @@ Shader "Custom/Toon Lit Outline Splash" {
 		uniform sampler2D _PaintTexture;
 		uniform float _PaintScale = 0;
 		
-		half _GlossinessPaint;
-		half _MetallicPaint;
+		uniform half _GlossinessPaint = 0;
+		uniform half _MetallicPaint = 0;
 		float _BumpScale;
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
@@ -73,7 +71,7 @@ Shader "Custom/Toon Lit Outline Splash" {
 			if(c.a < 0.4)
 				o.Alpha = 0;
 			else
-				o.Alpha = clamp(c.a * 3, 0, 0.9);
+				o.Alpha = clamp(c.a * 3, 0, 0.95);
 			
 			if(color.r == 1 && color.g == 1 && color.b == 1) {
 				o.Alpha = 0;
