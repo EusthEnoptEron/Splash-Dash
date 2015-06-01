@@ -116,11 +116,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99577dd19dc85742a27df50ca56a93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSound: {fileID: 8300000, guid: dfd10990a45c82e41a429d561406b81c, type: 3}
+  pickupSound: {fileID: 8300000, guid: d2ae2464f8c8b8844a861283b279696c, type: 3}
   outputAudioMixerGroup: {fileID: 24389646, guid: d9320f041a8052a4c803f5941aaa021f,
     type: 2}
-  color: {r: 0, g: 1, b: .00689649582, a: 1}
-  amount: .5
+  color: {r: 0, g: 1, b: 0, a: 1}
+  amount: 1
   anglePerSecond: 60
 --- !u!148 &14805688
 NetworkView:

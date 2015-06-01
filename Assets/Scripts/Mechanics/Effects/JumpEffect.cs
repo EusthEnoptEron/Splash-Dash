@@ -12,8 +12,7 @@ public class JumpEffect : Effect {
 
     protected override void OnEnable()
     {
-        Debug.Log("JUMP");
-        rigidbody.AddForce(Vector3.up * 500 * rigidbody.mass);
+        rigidbody.AddForce(Vector3.up * 350 * rigidbody.mass);
     }
 
     protected override void OnDisable()

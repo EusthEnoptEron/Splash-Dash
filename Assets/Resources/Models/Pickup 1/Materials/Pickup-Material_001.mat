@@ -100,11 +100,11 @@ Material:
         second: 0
       data:
         first:
-          name: _ZWrite
+          name: _BumpScale
         second: 1
       data:
         first:
-          name: _BumpScale
+          name: _ZWrite
         second: 1
       data:
         first:

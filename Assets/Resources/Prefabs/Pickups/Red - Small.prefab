@@ -208,8 +208,7 @@ MonoBehaviour:
   outputAudioMixerGroup: {fileID: 24389646, guid: d9320f041a8052a4c803f5941aaa021f,
     type: 2}
   color: {r: 1, g: 0, b: 0, a: 1}
-  material: {fileID: 0}
-  amount: .100000001
+  amount: .200000003
   anglePerSecond: 60
 --- !u!148 &14804888
 NetworkView:

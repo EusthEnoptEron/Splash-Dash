@@ -9,11 +9,20 @@ public class SmoothFollow : MonoBehaviour {
 	public float height = 2.0f;         // the height of the camera above the target
 	public float heightDamping = 2.0f;  // How much we damp in height 
 	public float rotationDamping= 1.0f; // How much we damp in rotation 
-	
+
+    public float minDistance = 5;
+    public float maxDistance = 10;
+    public float minSpeed = 5;
+    public float maxSpeed = 20;
+
 	void LateUpdate () {
 		// Early out if we don't have a target
 		if (!target) return;
-		
+
+        var rigidbody = target.GetComponent<Rigidbody>();
+        if(rigidbody)
+            distance = Mathf.Lerp(distance, Mathf.Lerp(minDistance, maxDistance, Mathf.Clamp01((rigidbody.velocity.magnitude - minSpeed) / (maxSpeed - minSpeed))), Time.deltaTime);
+
 		float currentRotationAngle = transform.eulerAngles.y;
 		float currentHeight = transform.position.y;
 
