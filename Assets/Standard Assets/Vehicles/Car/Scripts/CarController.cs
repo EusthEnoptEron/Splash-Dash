@@ -39,6 +39,7 @@ namespace UnityStandardAssets.Vehicles.Car
         [SerializeField] private float m_SlipLimit;
         [SerializeField] private float m_BrakeTorque;
 
+
         private Quaternion[] m_WheelMeshLocalRotations;
         private Vector3 m_Prevpos, m_Pos;
         private float m_SteerAngle;
@@ -48,7 +49,8 @@ namespace UnityStandardAssets.Vehicles.Car
         private float m_CurrentTorque;
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
-
+        private float wheelSlipBeforeBreaking;
+        private float wheelSlipBreaking = 1.2f;
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
@@ -79,6 +81,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
             m_Rigidbody = GetComponent<Rigidbody>();
             m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl*m_FullTorqueOverAllWheels);
+            this.wheelSlipBeforeBreaking = this.m_WheelColliders[2].sidewaysFriction.stiffness;
         }
 
 
@@ -155,7 +158,21 @@ namespace UnityStandardAssets.Vehicles.Car
 
             //Set the steer on the front wheels.
             //Assuming that wheels 0 and 1 are the front wheels.
-            m_SteerAngle = steering*m_MaximumSteerAngle;
+            float speed = m_Rigidbody.velocity.magnitude;
+            switch (m_SpeedType)
+            {
+                case SpeedType.MPH:
+
+                    speed *= 2.23693629f;
+                    break;
+
+                case SpeedType.KPH:
+                    speed *= 3.6f;
+                    break;
+            }
+
+            float VelBased_m_MaximumSteerAngle = m_MaximumSteerAngle * (1 - (speed / (this.MaxSpeed*1.2f)));
+            m_SteerAngle = steering * VelBased_m_MaximumSteerAngle;
             m_WheelColliders[0].steerAngle = m_SteerAngle;
             m_WheelColliders[1].steerAngle = m_SteerAngle;
 
@@ -167,9 +184,31 @@ namespace UnityStandardAssets.Vehicles.Car
             //Assuming that wheels 2 and 3 are the rear wheels.
             if (handbrake > 0f)
             {
-                var hbTorque = handbrake*m_MaxHandbrakeTorque;
+                var hbTorque = handbrake * m_MaxHandbrakeTorque;
                 m_WheelColliders[2].brakeTorque = hbTorque;
                 m_WheelColliders[3].brakeTorque = hbTorque;
+
+                WheelFrictionCurve frictionCurve = m_WheelColliders[2].sidewaysFriction;
+                frictionCurve.stiffness = this.wheelSlipBreaking;
+                m_WheelColliders[2].sidewaysFriction = frictionCurve;
+
+                frictionCurve = m_WheelColliders[3].sidewaysFriction;
+                frictionCurve.stiffness = this.wheelSlipBreaking;
+                m_WheelColliders[3].sidewaysFriction = frictionCurve;
+
+            }
+            else
+            {
+                if (m_WheelColliders[2].sidewaysFriction.stiffness != this.wheelSlipBeforeBreaking)
+                {
+                    WheelFrictionCurve frictionCurve = m_WheelColliders[2].sidewaysFriction;
+                    frictionCurve.stiffness = this.wheelSlipBeforeBreaking;
+                    m_WheelColliders[2].sidewaysFriction = frictionCurve;
+
+                    frictionCurve = m_WheelColliders[3].sidewaysFriction;
+                    frictionCurve.stiffness = this.wheelSlipBeforeBreaking;
+                    m_WheelColliders[3].sidewaysFriction = frictionCurve;
+                }
             }
 
 
