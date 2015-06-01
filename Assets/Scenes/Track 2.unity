@@ -1277,6 +1277,10 @@ MonoBehaviour:
   height: 4
   heightDamping: 2
   rotationDamping: 2
+  minDistance: 7
+  maxDistance: 10
+  minSpeed: 5
+  maxSpeed: 20
 --- !u!114 &892235280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,7 +1411,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b4b730ce87f1645ae64a8a1ea0a6c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
+  waypoints:
+  - {fileID: 757728823}
+  - {fileID: 683477612}
+  - {fileID: 468343276}
+  - {fileID: 2074890809}
+  - {fileID: 1939194161}
+  - {fileID: 851472537}
+  - {fileID: 859530106}
+  - {fileID: 20576478}
+  - {fileID: 47112521}
+  - {fileID: 438307043}
+  - {fileID: 1432075603}
 --- !u!4 &1070397700
 Transform:
   m_ObjectHideFlags: 0
@@ -1704,6 +1719,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11419710, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
+      propertyPath: m_SteerHelper
+      value: .379999995
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b0f53936c8b8c644e834c93ad06eb7c0, type: 2}
   m_IsPrefabParent: 0
@@ -1775,7 +1794,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22410408, guid: 1f5552a7f6e3a714fa3a786a8344f915, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 22410408, guid: 1f5552a7f6e3a714fa3a786a8344f915, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1891,6 +1910,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 166072, guid: 1f5552a7f6e3a714fa3a786a8344f915, type: 2}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22419882, guid: 1f5552a7f6e3a714fa3a786a8344f915, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 113
+      objectReference: {fileID: 0}
+    - target: {fileID: 22419882, guid: 1f5552a7f6e3a714fa3a786a8344f915, type: 2}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
