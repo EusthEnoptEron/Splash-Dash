@@ -50,7 +50,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
         private float wheelSlipBeforeBreaking;
-        private float wheelSlipBreaking = 1.2f;
+        private float wheelSlipBreaking = 0.99f;
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
@@ -189,11 +189,11 @@ namespace UnityStandardAssets.Vehicles.Car
                 m_WheelColliders[3].brakeTorque = hbTorque;
 
                 WheelFrictionCurve frictionCurve = m_WheelColliders[2].sidewaysFriction;
-                frictionCurve.stiffness = this.wheelSlipBreaking;
+                frictionCurve.stiffness *= this.wheelSlipBreaking;
                 m_WheelColliders[2].sidewaysFriction = frictionCurve;
 
                 frictionCurve = m_WheelColliders[3].sidewaysFriction;
-                frictionCurve.stiffness = this.wheelSlipBreaking;
+                frictionCurve.stiffness *= this.wheelSlipBreaking;
                 m_WheelColliders[3].sidewaysFriction = frictionCurve;
 
             }
