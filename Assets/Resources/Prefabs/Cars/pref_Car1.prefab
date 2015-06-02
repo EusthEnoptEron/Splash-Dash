@@ -2530,7 +2530,7 @@ MonoBehaviour:
   m_SpeedType: 1
   m_Topspeed: 120
   m_RevRangeBoundary: 1
-  m_SlipLimit: .349999994
+  m_SlipLimit: .975000024
   m_BrakeTorque: 20000
 --- !u!114 &11421068
 MonoBehaviour:
