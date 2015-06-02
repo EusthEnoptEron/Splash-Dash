@@ -18,6 +18,8 @@ public class NetworkController : MonoBehaviour {
 
     public GameObject carPrefab;
     public GameObject paintbrushPrefab;
+    public BirdsEye minimapCamera;
+
     public static bool IsConnected
     {
         get
@@ -31,6 +33,8 @@ public class NetworkController : MonoBehaviour {
 	// Use this for initialization
     private void Start()
     {
+        minimapCamera = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/pref_Minimap")).GetComponent<BirdsEye>();
+
     }
 
     public void StartServer()
@@ -108,6 +112,9 @@ public class NetworkController : MonoBehaviour {
     {
         var myCar = Network.Instantiate(carPrefab, transform.position, transform.rotation, 0) as GameObject;
         var myCockpit = myCar.GetComponent<Cockpit>();
+
+        minimapCamera.target = myCar.transform;
+
         myCockpit.SetName("Player #" + Random.Range(1, 1000));
     }
 
