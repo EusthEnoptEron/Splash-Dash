@@ -13,3 +13,6 @@ Temp
 Assembly-CSharp.csproj
 Standard Assets
 Dist
+/*.sln
+/*.csproj
+/*.suo
