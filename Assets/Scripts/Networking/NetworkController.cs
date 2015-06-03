@@ -18,7 +18,7 @@ public class NetworkController : MonoBehaviour {
 
     public GameObject carPrefab;
     public GameObject paintbrushPrefab;
-    public BirdsEye minimapCamera;
+    private BirdsEye minimapCamera;
 
     public static bool IsConnected
     {

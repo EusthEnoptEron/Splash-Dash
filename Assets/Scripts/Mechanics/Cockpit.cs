@@ -159,6 +159,7 @@ public class Cockpit : NetworkBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            m_Car.Move(0, 0, 0, 0);
         }
     }
 
