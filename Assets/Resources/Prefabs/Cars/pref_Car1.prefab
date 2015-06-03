@@ -2519,7 +2519,7 @@ MonoBehaviour:
   - {fileID: 11454450}
   - {fileID: 11433280}
   - {fileID: 11421068}
-  m_CentreOfMassOffset: {x: 0, y: 0, z: 0}
+  m_CentreOfMassOffset: {x: 0, y: 0, z: .400000006}
   m_MaximumSteerAngle: 8
   m_SteerHelper: .379999995
   m_TractionControl: .611999989
@@ -2815,7 +2815,7 @@ WheelCollider:
     m_ExtremumValue: .5
     m_AsymptoteSlip: .5
     m_AsymptoteValue: .75
-    m_Stiffness: 5
+    m_Stiffness: 6
   m_Enabled: 1
 --- !u!146 &14654380
 WheelCollider:
@@ -2873,7 +2873,7 @@ WheelCollider:
     m_ExtremumValue: .5
     m_AsymptoteSlip: .5
     m_AsymptoteValue: .75
-    m_Stiffness: 5
+    m_Stiffness: 6
   m_Enabled: 1
 --- !u!148 &14824198
 NetworkView:

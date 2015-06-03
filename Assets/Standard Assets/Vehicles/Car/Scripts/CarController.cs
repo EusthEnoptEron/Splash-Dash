@@ -50,7 +50,7 @@ namespace UnityStandardAssets.Vehicles.Car
         private Rigidbody m_Rigidbody;
         private const float k_ReversingThreshold = 0.01f;
         private float wheelSlipBeforeBreaking;
-        private float wheelSlipBreaking = 0.99f;
+        private float wheelSlipBreaking = 0.985f;
         public bool Skidding { get; private set; }
         public float BrakeInput { get; private set; }
         public float CurrentSteerAngle{ get { return m_SteerAngle; }}
