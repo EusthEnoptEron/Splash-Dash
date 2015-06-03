@@ -193,6 +193,8 @@ public class RaceController : NetworkBehaviour {
                     {
                         _racingCars.RemoveAt(i);
                         _topList.Add(car);
+
+                        car.SetState(false);
                     }
                 }
             }
@@ -316,7 +318,7 @@ public class RaceController : NetworkBehaviour {
         {
             if (playerCar.Value)
             {
-                playerCar.Value.enabled = false;
+                playerCar.Value.SetState(false);
             }
         }
 

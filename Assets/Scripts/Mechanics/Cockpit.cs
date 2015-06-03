@@ -8,6 +8,8 @@ using UnityStandardAssets.Utility;
 [RequireComponent(typeof(CarController))]
 public class Cockpit : NetworkBehaviour
 {
+    private bool _state = false;
+
     private CarController m_Car; // the car controller we want to use
     private new Rigidbody rigidbody;
 
@@ -78,11 +80,13 @@ public class Cockpit : NetworkBehaviour
     [RPC]
     public void SetState(bool active)
     {
-        enabled = active;
+        _state = active;
+        if (!enabled) enabled = active;
 
         GetComponentInChildren<SpurtEmitter>().enabled = active;
         GetComponentInChildren<PaintPathRenderer>().enabled = active;
     }
+
 
     public float Progress
     {
@@ -159,27 +163,35 @@ public class Cockpit : NetworkBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            m_Car.Move(0, 0, 0, 0);
         }
     }
 
     private void FixedUpdate()
     {
-        if (!IsRemoteControlled)
+        if (_state)
         {
-            //Debug.Log(Progress);
+            if (!IsRemoteControlled)
+            {
+                //Debug.Log(Progress);
 
-            // pass the input to the car!
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
+                // pass the input to the car!
+                float h = CrossPlatformInputManager.GetAxis("Horizontal");
+                float v = CrossPlatformInputManager.GetAxis("Vertical");
 #if !MOBILE_INPUT
-            float handbrake = CrossPlatformInputManager.GetAxis("Jump");
-            m_Car.Move(Inverted ? -h : h, v, v, handbrake);
+                float handbrake = CrossPlatformInputManager.GetAxis("Jump");
+                m_Car.Move(Inverted ? -h : h, v, v, handbrake);
 #else
             m_Car.Move(h, v, v, 0f);
 #endif
-        } else {
-            SyncedMovement();
+            }
+            else
+            {
+                SyncedMovement();
+            }
+        }
+        else
+        {
+            m_Car.Move(0, 0, 0, 0);
         }
     }
 
@@ -187,7 +199,7 @@ public class Cockpit : NetworkBehaviour
     private bool hasRoadContact = true;
     public void Update()
     {
-        if (!IsRemoteControlled)
+        if (!IsRemoteControlled && _state)
         {
             if (m_Car.Wheels.Any(wheel => wheel.isGrounded))
                 isOnRoad = hasRoadContact;
