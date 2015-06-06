@@ -189,10 +189,7 @@ public class Cockpit : NetworkBehaviour
                 SyncedMovement();
             }
         }
-        else
-        {
-            m_Car.Move(0, 0, 0, 0);
-        }
+        
     }
 
     public bool isOnRoad = true;
@@ -214,6 +211,11 @@ public class Cockpit : NetworkBehaviour
             {
                 Respawn();
             }
+        }
+
+        if (!_state && !IsRemoteControlled)
+        {
+            m_Car.Move(0, 0, 0, 0);
         }
     }
 

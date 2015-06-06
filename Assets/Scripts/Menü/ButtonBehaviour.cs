@@ -10,8 +10,7 @@ public class ButtonBehaviour : MonoBehaviour {
     public InputField NameInputField;
     public string EnteredName;
     public string GameName;
-    string TypeName = "BFH.GameDev.SplashDash";
-    private const string GAME_NAME = "Splash Dash";
+
     string ServerName;
     private HostData[] hostList;
     public GameObject CreateServerCanvas;
@@ -25,8 +24,8 @@ public class ButtonBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        MasterServer.RequestHostList(TypeName);
-        GamePresets.car = Cars[SelectedCar];
+        MasterServer.RequestHostList(GamePresets.TYPE_NAME);
+        GamePresets.CarNo = SelectedCar;
 	
 	}
 	
@@ -41,7 +40,7 @@ public class ButtonBehaviour : MonoBehaviour {
         {
             SelectedCar--;
         }
-        GamePresets.car = Resources.Load<GameObject>("Prefabs/Cars/pref_Car" + (SelectedCar + 1));
+        GamePresets.CarNo = SelectedCar;
 
 
     }
@@ -55,7 +54,7 @@ public class ButtonBehaviour : MonoBehaviour {
         {
             SelectedCar++;
         }
-        GamePresets.car = Resources.Load<GameObject>("Prefabs/Cars/pref_Car" + (SelectedCar + 1));
+        GamePresets.CarNo = SelectedCar;
     }
 
 
@@ -73,7 +72,7 @@ public class ButtonBehaviour : MonoBehaviour {
 
     public void StartAsServer()
     {
-        GamePresets.joinServer = false;
+        GamePresets.IsSlave = false;
     }
 
     //private void StartServer()
@@ -84,7 +83,7 @@ public class ButtonBehaviour : MonoBehaviour {
 
     private void connectToServer()
     {
-        GamePresets.joinServer = true;
+        GamePresets.IsSlave = true;
     }
 
 
@@ -138,8 +137,6 @@ public class ButtonBehaviour : MonoBehaviour {
 
     public void OnGetHostList()
     {
-        MasterServer.RequestHostList(TypeName);
-
 
         if (hostList != null)
         {
@@ -157,8 +154,8 @@ public class ButtonBehaviour : MonoBehaviour {
             {
                 if (GUILayout.Button(hostList[i].gameName))
                 {
-                    GamePresets.joinServer = true;
-                    GamePresets.host = hostList[i];
+                    GamePresets.IsSlave = true;
+                    GamePresets.Host = hostList[i];
                     //GamePresets.serverName = hostList.
                     //Network.Connect(hostList[i]);
                     Application.LoadLevel("Track 2");
@@ -177,7 +174,7 @@ public class ButtonBehaviour : MonoBehaviour {
     {
         if (serverNameInput.text.Length != 0)
         {
-            GamePresets.serverName = serverNameInput.text;
+            GamePresets.ServerName = serverNameInput.text;
         }
         
     }
@@ -191,7 +188,7 @@ public class ButtonBehaviour : MonoBehaviour {
 
     public void OnStartGame()
     {
-        if (GamePresets.serverName != "")
+        if (GamePresets.ServerName != "")
         {
             Application.LoadLevel("Track 2");
         }

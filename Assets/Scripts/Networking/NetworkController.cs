@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class NetworkController : MonoBehaviour {
-    private const string TYPE_NAME = "BFH.GameDev.SplashDash";
     private const string GAME_NAME = "Splash Dash";
     private HostData[] hostList;
     private RaceController race;
@@ -35,32 +34,37 @@ public class NetworkController : MonoBehaviour {
     {
         minimapCamera = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/pref_Minimap")).GetComponent<BirdsEye>();
 
+        if (GamePresets.IsSlave)
+        {
+            if (GamePresets.Host != null)
+            {
+                Network.Connect(GamePresets.Host);
+            }
+            else
+            {
+                Debug.LogError("No host given!");
+                Application.LoadLevel("Lobby");
+            }
+        }
+        else
+        {
+            StartServer();
+        }
     }
 
     public void StartServer()
     {
+        string sname = GamePresets.ServerName;
+
+        if (sname == "" || sname == null)
+            sname = "Untitled server #" + Random.Range(1, 10000);
         Network.InitializeServer(4, 25000, !Network.HavePublicAddress());
-        MasterServer.RegisterHost(TYPE_NAME, GAME_NAME);
+        MasterServer.RegisterHost(GamePresets.TYPE_NAME, GamePresets.ServerName);
     }
 
     void OnGUI()
     {
-        if (!IsConnected)
-        {
-            if (GUILayout.Button("Start Server"))
-                StartServer();
-            if (GUILayout.Button("Refresh Hosts"))
-                MasterServer.RequestHostList(TYPE_NAME);
-            if (hostList != null)
-            {
-                for (int i = 0; i < hostList.Length; i++)
-                {
-                    if (GUILayout.Button(hostList[i].gameName))
-                        Network.Connect(hostList[i]);
-                }
-            }
-        }
-        else if (Network.isServer && race.State == RaceState.Preparing)
+        if (IsConnected && Network.isServer && race.State == RaceState.Preparing)
         {
             if (GUILayout.Button("Start Game"))
             {
@@ -110,12 +114,12 @@ public class NetworkController : MonoBehaviour {
 
     private void SpawnPlayer()
     {
-        var myCar = Network.Instantiate(carPrefab, transform.position, transform.rotation, 0) as GameObject;
+        var myCar = Network.Instantiate( Resources.Load<GameObject>("Prefabs/Cars/pref_Car" + (GamePresets.CarNo + 1)), transform.position, transform.rotation, 0) as GameObject;
         var myCockpit = myCar.GetComponent<Cockpit>();
 
         minimapCamera.target = myCar.transform;
 
-        myCockpit.SetName("Player #" + Random.Range(1, 1000));
+        myCockpit.SetName(GamePresets.PlayerName);
     }
 
     private void OnPlayerDisconnected(NetworkPlayer player)
