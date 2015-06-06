@@ -2522,7 +2522,7 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 1
   m_SuspensionSpring:
-    spring: 500000
+    spring: 50000
     damper: 5000
     targetPosition: 0
   m_SuspensionDistance: .300000012
@@ -2536,10 +2536,10 @@ WheelCollider:
     m_AsymptoteValue: .5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: .300000012
-    m_ExtremumValue: .5
-    m_AsymptoteSlip: .5
-    m_AsymptoteValue: .75
+    m_ExtremumSlip: 1
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 1
+    m_AsymptoteValue: 2
     m_Stiffness: 6
   m_Enabled: 1
 --- !u!146 &14661226
@@ -2609,7 +2609,7 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 1
   m_SuspensionSpring:
-    spring: 500000
+    spring: 50000
     damper: 5000
     targetPosition: 0
   m_SuspensionDistance: .300000012
@@ -2623,10 +2623,10 @@ WheelCollider:
     m_AsymptoteValue: .5
     m_Stiffness: 1
   m_SidewaysFriction:
-    m_ExtremumSlip: .300000012
-    m_ExtremumValue: .5
-    m_AsymptoteSlip: .5
-    m_AsymptoteValue: .75
+    m_ExtremumSlip: 1
+    m_ExtremumValue: 1
+    m_AsymptoteSlip: 1
+    m_AsymptoteValue: 2
     m_Stiffness: 6
   m_Enabled: 1
 --- !u!148 &14853218

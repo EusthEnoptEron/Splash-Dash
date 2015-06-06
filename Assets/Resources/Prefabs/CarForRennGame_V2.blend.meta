@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: dff86195e7dbe4d40b5aeae3a9a15f12
+timeCreated: 1432380127
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: BackWheelLeft
+    100002: BackWheelRight
+    100004: BezierCircle
+    100006: BezierCircle_001
+    100008: BezierCircle_002
+    100010: //RootNode
+    100012: Cockbit
+    100014: Cube
+    100016: Cube_001
+    100018: Cube_002
+    100020: Cube_003
+    100022: Cube_004
+    100024: Cylinder_002
+    100026: Cylinder_003
+    100028: Cylinder_004
+    100030: Cylinder_006
+    100032: Cylinder_007
+    100034: Cylinder_008
+    100036: FrontWheelLeft
+    100038: FrontWheelRight
+    100040: Gun
+    100042: Gun_001
+    100044: Lamellen
+    100046: Sphere
+    400000: BackWheelLeft
+    400002: BackWheelRight
+    400004: BezierCircle
+    400006: BezierCircle_001
+    400008: BezierCircle_002
+    400010: //RootNode
+    400012: Cockbit
+    400014: Cube
+    400016: Cube_001
+    400018: Cube_002
+    400020: Cube_003
+    400022: Cube_004
+    400024: Cylinder_002
+    400026: Cylinder_003
+    400028: Cylinder_004
+    400030: Cylinder_006
+    400032: Cylinder_007
+    400034: Cylinder_008
+    400036: FrontWheelLeft
+    400038: FrontWheelRight
+    400040: Gun
+    400042: Gun_001
+    400044: Lamellen
+    400046: Sphere
+    2300000: BackWheelLeft
+    2300002: BackWheelRight
+    2300004: BezierCircle
+    2300006: BezierCircle_001
+    2300008: BezierCircle_002
+    2300010: Cockbit
+    2300012: Cube
+    2300014: Cube_001
+    2300016: Cube_002
+    2300018: Cube_003
+    2300020: Cube_004
+    2300022: Cylinder_002
+    2300024: Cylinder_003
+    2300026: Cylinder_004
+    2300028: Cylinder_006
+    2300030: Cylinder_007
+    2300032: Cylinder_008
+    2300034: FrontWheelLeft
+    2300036: FrontWheelRight
+    2300038: Gun
+    2300040: Gun_001
+    2300042: Lamellen
+    2300044: Sphere
+    3300000: BackWheelLeft
+    3300002: BackWheelRight
+    3300004: BezierCircle
+    3300006: BezierCircle_001
+    3300008: BezierCircle_002
+    3300010: Cockbit
+    3300012: Cube
+    3300014: Cube_001
+    3300016: Cube_002
+    3300018: Cube_003
+    3300020: Cube_004
+    3300022: Cylinder_002
+    3300024: Cylinder_003
+    3300026: Cylinder_004
+    3300028: Cylinder_006
+    3300030: Cylinder_007
+    3300032: Cylinder_008
+    3300034: FrontWheelLeft
+    3300036: FrontWheelRight
+    3300038: Gun
+    3300040: Gun_001
+    3300042: Lamellen
+    3300044: Sphere
+    4300000: BackWheelLeft
+    4300002: FrontWheelLeft
+    4300004: BezierCircle_001
+    4300006: Cylinder_007
+    4300008: Cylinder_006
+    4300010: Cube_003
+    4300012: BezierCircle
+    4300014: Cylinder_003
+    4300016: Cylinder_002
+    4300018: Cube_001
+    4300020: Cube
+    4300022: Cylinder_008
+    4300024: BackWheelRight
+    4300026: Cube_004
+    4300028: Cube_002
+    4300030: Cylinder_004
+    4300032: FrontWheelRight
+    4300034: Gun_001
+    4300036: Gun
+    4300038: Sphere
+    4300040: Lamellen
+    4300042: BezierCircle_002
+    4300044: Cockbit
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
