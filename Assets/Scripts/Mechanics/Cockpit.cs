@@ -85,6 +85,8 @@ public class Cockpit : NetworkBehaviour
 
         GetComponentInChildren<SpurtEmitter>().enabled = active;
         GetComponentInChildren<PaintPathRenderer>().enabled = active;
+        GetComponent<Rigidbody>().constraints = !active ? (RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ) : RigidbodyConstraints.None;
+        //GetComponent<Rigidbody>().freezeRotation = !active;
     }
 
 
