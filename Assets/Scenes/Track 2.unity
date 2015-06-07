@@ -1325,27 +1325,27 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 14853218, guid: 5106444c83977e543872122cc7d9a476, type: 2}
-      propertyPath: m_ViewID.m_ID
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 14853218, guid: 5106444c83977e543872122cc7d9a476, type: 2}
-      propertyPath: m_ViewID.m_Type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
-      propertyPath: m_ViewID.m_ID
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
-      propertyPath: m_ViewID.m_Type
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 14857490, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_ID
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 14857490, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+      propertyPath: m_ViewID.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 14853218, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+      propertyPath: m_ViewID.m_ID
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 14853218, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}

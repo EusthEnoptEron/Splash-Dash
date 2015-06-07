@@ -673,7 +673,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .694999993, z: -.488999993}
+  m_LocalPosition: {x: 0, y: 1.04200006, z: -.289999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421012}
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_SpeedType: 1
   m_Topspeed: 120
   m_RevRangeBoundary: 1
-  m_SlipLimit: .975000024
+  m_SlipLimit: 1.60000002
   m_BrakeTorque: 20000
 --- !u!114 &11465978
 MonoBehaviour:
@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 1, a: 1}
-  fillLevel: 1
+  fillLevel: 0
   drainSpeed: .300000012
   button: Fire3
 --- !u!114 &11471188
@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 1, b: 0, a: 1}
-  fillLevel: 1
+  fillLevel: 0
   drainSpeed: .200000003
   button: Fire1
 --- !u!114 &11489854
@@ -2498,7 +2498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
-  fillLevel: 1
+  fillLevel: 0
   drainSpeed: .200000003
   button: Fire2
 --- !u!114 &11497378

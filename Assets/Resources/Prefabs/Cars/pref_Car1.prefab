@@ -2679,7 +2679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 1, g: 0, b: 0, a: 1}
-  fillLevel: 1
+  fillLevel: 0
   drainSpeed: .200000003
   button: Fire2
 --- !u!114 &11467434
@@ -2707,7 +2707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 1, a: 1}
-  fillLevel: 1
+  fillLevel: 0
   drainSpeed: .300000012
   button: Fire3
 --- !u!114 &11475958
@@ -2722,7 +2722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0, g: 1, b: 0, a: 1}
-  fillLevel: 1
+  fillLevel: 0
   drainSpeed: .200000003
   button: Fire1
 --- !u!114 &11479152
