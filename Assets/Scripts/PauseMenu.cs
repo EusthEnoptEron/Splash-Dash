@@ -15,17 +15,20 @@ public class PauseMenu : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    if(Input.GetKeyDown(KeyCode.Escape)){
+            var raceController = RaceController.Locate();
 
-            
+            if (raceController.State < RaceState.Running)
+                return;
+
             if (PauseCanvas.activeSelf)
 	        {
-               
 	            PauseCanvas.SetActive(false);
-                
+                raceController.SetPaused(false);
    	        }
             else
             {
                 PauseCanvas.SetActive(true);
+                raceController.SetPaused(true);
                //TODO: Disable Carcontroll
             }
 
@@ -35,8 +38,8 @@ public class PauseMenu : MonoBehaviour {
 
     public void OnPauseReturn()
     {
+        Network.Disconnect();
         Application.LoadLevel("Menü");
-
     }
 
     public void OnPauseResume()

@@ -56,6 +56,9 @@ public class Cockpit : NetworkBehaviour
         base.Awake();
 
         rigidbody = GetComponent<Rigidbody>();
+
+        // Start constrained
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         // get the car controller
         m_Car = GetComponent<CarController>();
         _circuit = GameObject.FindGameObjectWithTag("Circuit").GetComponent<WaypointContainer>();
@@ -85,7 +88,8 @@ public class Cockpit : NetworkBehaviour
 
         GetComponentInChildren<SpurtEmitter>().enabled = active;
         GetComponentInChildren<PaintPathRenderer>().enabled = active;
-        GetComponent<Rigidbody>().constraints = !active ? (RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ) : RigidbodyConstraints.None;
+        
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         //GetComponent<Rigidbody>().freezeRotation = !active;
     }
 
@@ -135,37 +139,6 @@ public class Cockpit : NetworkBehaviour
     private bool IsNextWaypoint(Waypoint waypoint)
     {
         return waypoint.id == nextWaypoint.id;
-    }
-
-    private bool _focused = true;
-    private void OnApplicationFocus(bool focus)
-    {
-        _focused = focus;
-
-        if (enabled)
-        {
-            if (_focused) OnEnable();
-            else OnDisable();
-        }
-    }
-
-
-    private void OnEnable()
-    {
-        if (!IsRemoteControlled)
-        {
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = false;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (!IsRemoteControlled)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-        }
     }
 
     private void FixedUpdate()

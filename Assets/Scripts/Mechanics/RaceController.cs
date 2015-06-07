@@ -36,6 +36,8 @@ public class RaceController : NetworkBehaviour {
 
     private List<Cockpit> _positionTable = new List<Cockpit>();
 
+    private bool _focused = true;
+    private bool _paused;
 
     public RaceState State
     {
@@ -73,8 +75,14 @@ public class RaceController : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        UpdateCursor();
 	}
+
+    void UpdateCursor()
+    {
+        Cursor.lockState = (_focused && (State == RaceState.Running || State == RaceState.Starting) && !_paused) ? CursorLockMode.Confined : CursorLockMode.None;
+        Cursor.visible = _focused && (State == RaceState.Running || State == RaceState.Starting) && !_paused ? false : true;
+    }
 
     private void SyncPositionTable()
     {
@@ -100,6 +108,20 @@ public class RaceController : NetworkBehaviour {
             
         }
     }
+
+    public void SetPaused(bool value)
+    {
+        _paused = value;
+        MyCar.SetState(!value);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        _focused = focus;
+    }
+
+
+
 
     public bool IsFull
     {

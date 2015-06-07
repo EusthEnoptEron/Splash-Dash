@@ -6,6 +6,7 @@ public class NetworkController : MonoBehaviour {
     private const string GAME_NAME = "Splash Dash";
     private HostData[] hostList;
     private RaceController race;
+    public GameObject startServerCanvas;
 
     public int initialSplashes = 500;
     public Vector2 initialSplashSize = new Vector2(1f, 20f);
@@ -49,6 +50,8 @@ public class NetworkController : MonoBehaviour {
         else
         {
             StartServer();
+
+            startServerCanvas.SetActive(true);
         }
     }
 
@@ -62,16 +65,14 @@ public class NetworkController : MonoBehaviour {
         MasterServer.RegisterHost(GamePresets.TYPE_NAME, GamePresets.ServerName);
     }
 
-    void OnGUI()
+   
+    public void StartRace()
     {
-        if (IsConnected && Network.isServer && race.State == RaceState.Preparing)
+        if (Network.isServer)
         {
-            if (GUILayout.Button("Start Game"))
-            {
-                race.StartRace();
-            }
+            startServerCanvas.SetActive(false);
+            race.StartRace();
         }
-
     }
 
     void OnMasterServerEvent(MasterServerEvent msEvent)
