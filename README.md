@@ -5,4 +5,6 @@
 (___/(__)  (____)(__)(__)(___/(_) (_)  (____/(__)(__)(___/(_) (_)
 ```
 
-A colorful fun racer. Whether or not it's actually fun to play is another question.
+A colorful multi-player fun racer made with Unity. Whether or not it's actually fun to play is another question.
+
+![](http://www.zomg.ch/splash-dash.jpg)
