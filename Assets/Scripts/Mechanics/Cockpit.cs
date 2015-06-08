@@ -154,6 +154,7 @@ public class Cockpit : NetworkBehaviour
                 float v = CrossPlatformInputManager.GetAxis("Vertical");
 #if !MOBILE_INPUT
                 float handbrake = CrossPlatformInputManager.GetAxis("Jump");
+
                 m_Car.Move(Inverted ? -h : h, v, v, handbrake);
 #else
             m_Car.Move(h, v, v, 0f);
@@ -190,7 +191,14 @@ public class Cockpit : NetworkBehaviour
 
         if (!_state && !IsRemoteControlled)
         {
-            m_Car.Move(0, 0, 0, 0);
+            try
+            {
+                m_Car.Move(0, 0, 0, 0);
+            }
+            catch (System.Exception e)
+            {
+                // THIS ERROR DOES NOT MAKE ANY GODDAMN SENSE
+            }
         }
     }
 

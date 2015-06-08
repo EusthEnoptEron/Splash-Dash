@@ -272,7 +272,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74662406}
---- !u!1 &86224676 stripped
+--- !u!1 &86224676
 GameObject:
   m_PrefabParentObject: {fileID: 100004, guid: 6fb7ab37b10014b4ab36229e15d6c951, type: 3}
   m_PrefabInternal: {fileID: 101952313}
@@ -1018,7 +1018,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 645220431}
---- !u!1 &734653390 stripped
+--- !u!1 &734653390
 GameObject:
   m_PrefabParentObject: {fileID: 112172, guid: ed156686538c8e444b46f76d691a4a63, type: 2}
   m_PrefabInternal: {fileID: 1815461925}
@@ -1684,25 +1684,25 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 14857490, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_ID
-      value: 3
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 14857490, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+    - target: {fileID: 14857490, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_ID
-      value: 2
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 14871100, guid: 5106444c83977e543872122cc7d9a476, type: 2}
+    - target: {fileID: 14857490, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 14853218, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_ID
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 14853218, guid: 5106444c83977e543872122cc7d9a476, type: 2}
       propertyPath: m_ViewID.m_Type
@@ -1881,7 +1881,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1068103450}
---- !u!1 &1123751525 stripped
+--- !u!1 &1123751525
 GameObject:
   m_PrefabParentObject: {fileID: 187668, guid: 1454042d865cdcb498e87731ccb59546, type: 2}
   m_PrefabInternal: {fileID: 949103249}
