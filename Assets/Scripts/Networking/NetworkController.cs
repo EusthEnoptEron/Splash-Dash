@@ -71,6 +71,7 @@ public class NetworkController : MonoBehaviour {
         if (Network.isServer)
         {
             startServerCanvas.SetActive(false);
+            MasterServer.UnregisterHost();
             race.StartRace();
         }
     }

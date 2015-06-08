@@ -37,6 +37,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Ramp
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _MetallicGlossMap
         second:
           m_Texture: {fileID: 0}
@@ -79,7 +86,7 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Ramp
+          name: _MainTexPaint
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -87,13 +94,6 @@ Material:
       data:
         first:
           name: _ToonShade
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _MainTexPaint
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -111,6 +111,10 @@ Material:
         first:
           name: _DstBlend
         second: 0
+      data:
+        first:
+          name: _Outline
+        second: .00499999989
       data:
         first:
           name: _Glossiness
@@ -153,10 +157,6 @@ Material:
         second: 0
       data:
         first:
-          name: _Outline
-        second: .00499999989
-      data:
-        first:
           name: _GlossinessPaint
         second: .800000012
       data:
@@ -171,12 +171,12 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .602941155, g: .602941155, b: .602941155, a: 1}
-      data:
-        first:
-          name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _OutlineColor
         second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
+          name: _EmissionColorUI
+        second: {r: 1, g: 1, b: 1, a: 1}

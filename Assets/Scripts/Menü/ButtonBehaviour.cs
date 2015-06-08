@@ -24,7 +24,6 @@ public class ButtonBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        MasterServer.RequestHostList(GamePresets.TYPE_NAME);
         GamePresets.CarNo = SelectedCar;
 	
 	}
@@ -138,6 +137,8 @@ public class ButtonBehaviour : MonoBehaviour {
     public void OnGetHostList()
     {
 
+        MasterServer.ClearHostList();
+        MasterServer.RequestHostList(GamePresets.TYPE_NAME);
         if (hostList != null)
         {
             displayGui = true;
