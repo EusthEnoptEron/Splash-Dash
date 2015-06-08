@@ -93,6 +93,12 @@ public class Cockpit : NetworkBehaviour
         //GetComponent<Rigidbody>().freezeRotation = !active;
     }
 
+    [RPC]
+    public void SetLaps(int lap)
+    {
+        this.Laps = lap;
+    }
+
 
     public float Progress
     {
@@ -121,7 +127,10 @@ public class Cockpit : NetworkBehaviour
                 currentWaypoint = waypoint;
                 nextWaypoint = _circuit.GetNextWaypoint(currentWaypoint);
 
-                if (_circuit.IsLast(waypoint)) Laps++;
+                if (_circuit.IsLast(waypoint))
+                {
+                    networkView.RPC("SetLaps",  RPCMode.All, Laps+1);
+                }
             }
         }
         else if(collider.CompareTag("Road"))

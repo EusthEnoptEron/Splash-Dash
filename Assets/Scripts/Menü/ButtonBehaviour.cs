@@ -146,6 +146,15 @@ public class ButtonBehaviour : MonoBehaviour {
 
     }
 
+    public void OnChangeColorfulToggle(bool active)
+    {
+        GamePresets.Colorful = active;
+    }
+
+    public void OnChangeLapCount(float laps)
+    {
+        GamePresets.Laps = Mathf.RoundToInt(laps);
+    }
 
     void OnGUI()
     {

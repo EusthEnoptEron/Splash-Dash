@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class PaintBrush : NetworkBehaviour {
     struct Point
@@ -13,10 +14,14 @@ public class PaintBrush : NetworkBehaviour {
     }
 
     public ComputeShader computeShader;
-    private Color[,] colorMat = new Color[4096, 4096];
+    private Color[,] colorMat = new Color[TEXTURE_SIZE, TEXTURE_SIZE];
 
     private RenderTexture rPaintTexture;
+    private Texture2D _paintTexture;
+
     private int counter = 0;
+    private bool _dirty = false;
+    private const int TEXTURE_SIZE = 512;
 
     [SerializeField]
     private bool _adaptiveScale = true;
@@ -40,24 +45,34 @@ public class PaintBrush : NetworkBehaviour {
         base.Awake();
         networkView.stateSynchronization = NetworkStateSynchronization.Off;
 
-        rPaintTexture = new RenderTexture(4096, 4096, 8);
-        rPaintTexture.enableRandomWrite = true;
-        rPaintTexture.Create();
-        computeShader.SetTexture(0, "Result", rPaintTexture);
+        //rPaintTexture = new RenderTexture(4096, 4096, 8);
+        //rPaintTexture.enableRandomWrite = true;
+        //rPaintTexture.Create();
+        //computeShader.SetTexture(0, "Result", _paintTexture);
+
+        _paintTexture = new Texture2D(TEXTURE_SIZE, TEXTURE_SIZE, TextureFormat.ARGB32, false);
+        _paintTexture.SetPixels(0, 0, TEXTURE_SIZE, TEXTURE_SIZE, Enumerable.Repeat(Color.clear, TEXTURE_SIZE * TEXTURE_SIZE).ToArray());
+        _dirty = true;
 
         var mapSize = Ruler.Measure();
         float maxLength = Mathf.Max(mapSize.x, mapSize.y);
         
         if(_adaptiveScale)
-            SCALE_FACTOR = 4096 / maxLength;
+            SCALE_FACTOR = TEXTURE_SIZE / maxLength;
 
         Debug.Log("Scale factor: " + SCALE_FACTOR);
-        Shader.SetGlobalTexture("_PaintTexture", rPaintTexture);
+        Shader.SetGlobalTexture("_PaintTexture", _paintTexture);
         Shader.SetGlobalFloat("_PaintScale", SCALE_FACTOR);
         Shader.SetGlobalFloat("_GlossinessPaint", 0.7f);
         Shader.SetGlobalFloat("_MetallicPaint", 0.7f);
+        Shader.SetGlobalFloat("_TextureWidth", TEXTURE_SIZE);
+
     }
 
+    void Start()
+    {
+        StartCoroutine(UpdateTexture());
+    }
     void OnApplicationQuit()
     {
         Shader.SetGlobalFloat("_PaintScale", 0);
@@ -65,6 +80,8 @@ public class PaintBrush : NetworkBehaviour {
 
     public void Paint(Vector3 worldPos, Color color, int width = 20, bool forward = true)
     {
+        //if (_dirty) return;
+
         width = Mathf.Max(5, width);
 
         var pixelPos = WorldToPixelSpace(worldPos);
@@ -76,10 +93,14 @@ public class PaintBrush : NetworkBehaviour {
 
         //dirty = true;
         float radius = width / 2f;
-        computeShader.SetVector("Color", color);
-        computeShader.SetVector("Offset", new Vector2(left, top));
-        computeShader.SetFloat("Radius", radius);
-        computeShader.Dispatch(0, Mathf.CeilToInt(width / 5f), Mathf.CeilToInt(width / 5f), 1);
+
+        width -= Mathf.Max(0, (left + width) - (TEXTURE_SIZE - 1));
+        width -= Mathf.Max(0, (top + width) - (TEXTURE_SIZE - 1));
+
+        //computeShader.SetVector("Color", color);
+        //computeShader.SetVector("Offset", new Vector2(left, top));
+        //computeShader.SetFloat("Radius", radius);
+        //computeShader.Dispatch(0, Mathf.CeilToInt(width / 5f), Mathf.CeilToInt(width / 5f), 1);
 
         var vRadius = new Vector2(radius, radius);
         for (int y = 0; y < width; y++)
@@ -98,11 +119,15 @@ public class PaintBrush : NetworkBehaviour {
                         if ((position - vRadius).magnitude <= radius)
                         {
                             colorMat[rx, ry] = color;
+                            _paintTexture.SetPixel(rx, ry, color);
                         }
                     }
                 }
             }
         }
+        //_paintTexture.SetPixels(left, top, width, width, Enumerable.Repeat(color, width * width).ToArray());
+
+        _dirty = true;
 
         if (forward && NetworkController.IsConnected)
         {
@@ -126,17 +151,38 @@ public class PaintBrush : NetworkBehaviour {
     private Point WorldToPixelSpace(Vector3 worldPos)
     {
         return new Point(
-            (int)(Mathf.Clamp(worldPos.x * SCALE_FACTOR + 2048, 0, colorMat.GetLength(0))),
-            (int)(Mathf.Clamp(worldPos.z * SCALE_FACTOR + 2048, 0, colorMat.GetLength(1)))
+            (int)(Mathf.Clamp(worldPos.x * SCALE_FACTOR + TEXTURE_SIZE / 2, 0, colorMat.GetLength(0) - 1)),
+            (int)(Mathf.Clamp(worldPos.z * SCALE_FACTOR + TEXTURE_SIZE / 2, 0, colorMat.GetLength(1) - 1))
         );
     }
 
 	// Update is called once per frame
 	void Update () {
         //Debug.Log(counter);
-        counter = 0;
+        //counter = 0;
+
+        //if (_dirty)
+        //{
+        //    _paintTexture.Apply(false, false);
+        //    _dirty = false;
+        //}
 	}
 
+
+    IEnumerator UpdateTexture()
+    {
+        while (true)
+        {
+            if (_dirty)
+            {
+                _paintTexture.Apply(false, false);
+                _dirty = false;
+                //yield return new WaitForSeconds(0.5f);
+
+            }
+            yield return null;
+        }
+    }
     protected override void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
     }

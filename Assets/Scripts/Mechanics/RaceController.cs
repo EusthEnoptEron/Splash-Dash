@@ -22,7 +22,7 @@ public class RaceController : NetworkBehaviour {
     private GameObject prefRaceUI;
 
 
-    public int Laps = 3;
+    public int Laps = 1;
 
     private Animator GUI;
 

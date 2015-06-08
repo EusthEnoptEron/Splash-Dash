@@ -77,6 +77,8 @@
 		
 		uniform half _GlossinessPaint = 0;
 		uniform half _MetallicPaint = 0;
+		uniform half _TextureWidth = 4096;
+
 		float _BumpScale;
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
@@ -85,16 +87,13 @@
 				return;
 			}
 	
-			
-			float textureWidth = 4096;
-			float textureHeight = 4096;
 			//half2 uvs = half2(
 			//	((IN.worldPos.x + (sin(IN.worldPos.x + _Time.y)) * 0.1 )  * 100 / textureWidth) + 0.5,
 			//	((IN.worldPos.z + (cos(IN.worldPos.z + _Time.y)) * 0.1 ) * 100 / textureHeight) + 0.5
 			//);
 			half2 uvs = half2(
-				(IN.worldPos.x * _PaintScale / textureWidth) + 0.5,
-				(IN.worldPos.z * _PaintScale / textureHeight) + 0.5
+				(IN.worldPos.x * _PaintScale / _TextureWidth) + 0.5,
+				(IN.worldPos.z * _PaintScale / _TextureWidth) + 0.5
 			);
 
 			fixed4 color = tex2D(_PaintTexture, uvs);

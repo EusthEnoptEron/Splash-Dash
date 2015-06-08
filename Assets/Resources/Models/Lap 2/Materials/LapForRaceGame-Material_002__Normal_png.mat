@@ -99,10 +99,6 @@ Material:
         second: 0
       data:
         first:
-          name: _Outline
-        second: .00499999989
-      data:
-        first:
           name: _Glossiness
         second: 0
       data:
@@ -141,6 +137,10 @@ Material:
         first:
           name: _Mode
         second: 0
+      data:
+        first:
+          name: _Outline
+        second: .00879999995
     m_Colors:
       data:
         first:
@@ -152,9 +152,9 @@ Material:
         second: {r: .800000012, g: .800000012, b: .800000012, a: 1}
       data:
         first:
-          name: _OutlineColor
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
           name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: 0, b: 0, a: 1}

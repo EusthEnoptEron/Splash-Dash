@@ -94,6 +94,7 @@ public class NetworkController : MonoBehaviour {
         paintbrush.transform.SetParent(transform, false);
 
         race = paintbrush.GetComponent<RaceController>();
+        race.Laps = GamePresets.Laps;
 
         SpawnPlayer();
 
@@ -101,16 +102,19 @@ public class NetworkController : MonoBehaviour {
 
         var mapSize = Ruler.Measure();
 
-        for (int i = 0; i < initialSplashes; i++)
+        if (GamePresets.Colorful)
         {
-            brush.Paint(
-                Random.insideUnitSphere * mapSize.x / 2,
-                initialSplashColors[Random.Range(0, initialSplashColors.Length)], 
-                Random.Range(
-                    (int)(initialSplashSize.x * PaintBrush.SCALE_FACTOR), 
-                    (int)(initialSplashSize.y * PaintBrush.SCALE_FACTOR)
-                )
-            );
+            for (int i = 0; i < initialSplashes; i++)
+            {
+                brush.Paint(
+                    Random.insideUnitSphere * mapSize.x / 2,
+                    initialSplashColors[Random.Range(0, initialSplashColors.Length)],
+                    Random.Range(
+                        (int)(initialSplashSize.x * PaintBrush.SCALE_FACTOR),
+                        (int)(initialSplashSize.y * PaintBrush.SCALE_FACTOR)
+                    )
+                );
+            }
         }
     }
 

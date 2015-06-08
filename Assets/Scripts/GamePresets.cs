@@ -34,4 +34,8 @@ public static class GamePresets {
 
     public const string TYPE_NAME = "BFH.GameDev.SplashDash";
 
+
+    public static bool Colorful = true;
+
+    public static int Laps = 3;
 }
