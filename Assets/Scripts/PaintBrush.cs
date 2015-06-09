@@ -21,12 +21,14 @@ public class PaintBrush : NetworkBehaviour {
 
     private int counter = 0;
     private bool _dirty = false;
-    private const int TEXTURE_SIZE = 512;
+    private const int TEXTURE_SIZE = 4096;
 
     [SerializeField]
     private bool _adaptiveScale = true;
 
     public static float SCALE_FACTOR = 1;
+
+    public bool useComputeShader = true;
 
 
     public static PaintBrush Locate()
@@ -45,14 +47,19 @@ public class PaintBrush : NetworkBehaviour {
         base.Awake();
         networkView.stateSynchronization = NetworkStateSynchronization.Off;
 
-        //rPaintTexture = new RenderTexture(4096, 4096, 8);
-        //rPaintTexture.enableRandomWrite = true;
-        //rPaintTexture.Create();
-        //computeShader.SetTexture(0, "Result", _paintTexture);
-
-        _paintTexture = new Texture2D(TEXTURE_SIZE, TEXTURE_SIZE, TextureFormat.ARGB32, false);
-        _paintTexture.SetPixels(0, 0, TEXTURE_SIZE, TEXTURE_SIZE, Enumerable.Repeat(Color.clear, TEXTURE_SIZE * TEXTURE_SIZE).ToArray());
-        _dirty = true;
+        if (useComputeShader)
+        {
+            rPaintTexture = new RenderTexture(TEXTURE_SIZE, TEXTURE_SIZE, 8);
+            rPaintTexture.enableRandomWrite = true;
+            rPaintTexture.Create();
+            computeShader.SetTexture(0, "Result", rPaintTexture);
+        }
+        else
+        {
+            _paintTexture = new Texture2D(TEXTURE_SIZE, TEXTURE_SIZE, TextureFormat.ARGB32, false);
+            _paintTexture.SetPixels(0, 0, TEXTURE_SIZE, TEXTURE_SIZE, Enumerable.Repeat(Color.clear, TEXTURE_SIZE * TEXTURE_SIZE).ToArray());
+            _dirty = true;
+        }
 
         var mapSize = Ruler.Measure();
         float maxLength = Mathf.Max(mapSize.x, mapSize.y);
@@ -61,7 +68,12 @@ public class PaintBrush : NetworkBehaviour {
             SCALE_FACTOR = TEXTURE_SIZE / maxLength;
 
         Debug.Log("Scale factor: " + SCALE_FACTOR);
-        Shader.SetGlobalTexture("_PaintTexture", _paintTexture);
+
+        if(useComputeShader)
+            Shader.SetGlobalTexture("_PaintTexture", rPaintTexture);
+        else
+            Shader.SetGlobalTexture("_PaintTexture", _paintTexture);
+
         Shader.SetGlobalFloat("_PaintScale", SCALE_FACTOR);
         Shader.SetGlobalFloat("_GlossinessPaint", 0.7f);
         Shader.SetGlobalFloat("_MetallicPaint", 0.7f);
@@ -89,18 +101,19 @@ public class PaintBrush : NetworkBehaviour {
         int left = (int)(pixelPos.x) - width / 2;
         int top = (int)(pixelPos.y) - width / 2;
 
-        //paintTexture.SetPixels(left, top, Mathf.RoundToInt(width / 2f), Mathf.RoundToInt(width / 2f), Enumerable.Repeat(color, width * width).ToArray() );
-
         //dirty = true;
         float radius = width / 2f;
 
+        if (useComputeShader)
+        {
+            computeShader.SetVector("Color", color);
+            computeShader.SetVector("Offset", new Vector2(left, top));
+            computeShader.SetFloat("Radius", radius);
+            computeShader.Dispatch(0, Mathf.CeilToInt(width / 5f), Mathf.CeilToInt(width / 5f), 1);
+        }
+
         width -= Mathf.Max(0, (left + width) - (TEXTURE_SIZE - 1));
         width -= Mathf.Max(0, (top + width) - (TEXTURE_SIZE - 1));
-
-        //computeShader.SetVector("Color", color);
-        //computeShader.SetVector("Offset", new Vector2(left, top));
-        //computeShader.SetFloat("Radius", radius);
-        //computeShader.Dispatch(0, Mathf.CeilToInt(width / 5f), Mathf.CeilToInt(width / 5f), 1);
 
         var vRadius = new Vector2(radius, radius);
         for (int y = 0; y < width; y++)
@@ -119,14 +132,16 @@ public class PaintBrush : NetworkBehaviour {
                         if ((position - vRadius).magnitude <= radius)
                         {
                             colorMat[rx, ry] = color;
-                            _paintTexture.SetPixel(rx, ry, color);
+                            if (!useComputeShader)
+                            {
+                                _paintTexture.SetPixel(rx, ry, color);
+                            }
                         }
                     }
                 }
             }
         }
         //_paintTexture.SetPixels(left, top, width, width, Enumerable.Repeat(color, width * width).ToArray());
-
         _dirty = true;
 
         if (forward && NetworkController.IsConnected)
@@ -171,6 +186,8 @@ public class PaintBrush : NetworkBehaviour {
 
     IEnumerator UpdateTexture()
     {
+        if (useComputeShader) yield break;
+
         while (true)
         {
             if (_dirty)
